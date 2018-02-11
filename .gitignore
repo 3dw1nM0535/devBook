@@ -1,0 +1,10 @@
+# Avoid tracking these files and folder on GitHub
+
+node_modules
+dist
+build
+lib
+coverage
+.env
+*.log
+.DS_Store
