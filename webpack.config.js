@@ -1,4 +1,5 @@
 // ES6 code transpiler to ES5 for development
+
 import path from 'path';
 import webpack from 'webpack';
 let debug = process.env.NODE_ENV !== 'production';
