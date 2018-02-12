@@ -37,7 +37,7 @@ module.exports = {
       {
         // JS
         test: /\.js$/,
-        loaders: ["babel-loader"],
+        loaders: ["react-hot-loader/webpack", "babel-loader"],
         exclude: /node_modules/,
         include: path.join(__dirname + '/client/src')
       },
