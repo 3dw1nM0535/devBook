@@ -1,24 +1,23 @@
 // ES6 code transpiler to ES5 for development
 
-import path from 'path';
-import webpack from 'webpack';
+var path = require('path');
+var webpack = require('webpack');
 let debug = process.env.NODE_ENV !== 'production';
 
-export default {
-  context: path.join(__dirname + 'client/src'),
+module.exports = {
   devtool: debug ? 'inline-sourcemap' : '',
   entry: [
-    debug ? 'webpack-hot-middleware/client/src' : '',
-    path.join(__dirname + 'client/src/index.js')
+    'webpack-hot-middleware/client',
+    path.join(__dirname + '/client/src/index')
   ],
   output: {
-    path: path.join(__dirname + 'dist'),
+    path: path.join(__dirname + '/dist'),
     filename: 'bundle.js',
     publicPath: '/dist/'
   },
   plugins : debug ? [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ] : [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false, compressor: { warnings: false } }) // Clean code without docBlocks
@@ -28,14 +27,14 @@ export default {
       {
         // JS
         test: /\.js$/,
-        loaders: ['react-hot-loader/webpack', 'babel-loader'],
-        include: path.join(__dirname + 'client/src')
+        loaders: ["babel-loader"],
+        include: path.join(__dirname + '/client/src')
       },
       // CSS
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader',
-        include: path.join(__dirname + 'client/src')
+        include: path.join(__dirname + '/client/src')
       }
     ]
   }
