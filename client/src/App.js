@@ -1,10 +1,10 @@
 import React from "react";
 
-import HeaderPage from "./components/HeaderPage";
+import HomePage from "./components/pages/HomePage";
 
 const App = () => (
   <div className="ui container">
-    <HeaderPage />
+    <HomePage />
   </div>
 );
 
