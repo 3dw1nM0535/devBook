@@ -5,6 +5,8 @@ import webpack from "webpack";
 import dotenv from "dotenv";
 import config from "../webpack.config";
 
+config.plugins.push(new webpack.HotModuleReplacementPlugin());
+
 // Init provate keys
 dotenv.config();
 
@@ -20,6 +22,7 @@ const compiler = webpack(config);
 // Webpack bundler Middleware
 app.use(require("webpack-dev-middleware")(compiler, {
   noInfo: true,
+  hot: true,
   publicPath: config.output.publicPath,
 }));
 
