@@ -12,7 +12,7 @@
     },
   "rules": {
       "semi": ["error", "always"],
-      "quotes": ["error", "double"],
+      "quotes": [0, "double"],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     },
   "env": {

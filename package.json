@@ -4,7 +4,7 @@
   "description": "Event Booking, Scheduling, and Broadcasting",
   "main": "server/index.js",
   "scripts": {
-    "build:webpack": "NODE_ENV=production webpack --config webpack.config.js",
+    "build:webpack": "webpack --config webpack.config.js",
     "build": "npm run clean && npm run build:webpack",
     "clean": "rimraf dist",
     "start": "nodemon --watch server --exec babel-node server/index.js",
@@ -43,6 +43,8 @@
     "url-loader": "^0.6.2"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "prop-types": "^15.6.0",
@@ -55,6 +57,7 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.14",
     "semantic-ui-react": "^0.78.2",
+    "validator": "^9.4.0",
     "webpack": "^3.11.0",
     "webpack-dev-middleware": "^2.0.5",
     "webpack-hot-middleware": "^2.21.0"

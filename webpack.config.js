@@ -2,26 +2,24 @@
 
 var path = require('path');
 var webpack = require('webpack');
-let debug = process.env.NODE_ENV !== 'production';
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: debug ? 'inline-sourcemap' : '',
+  context: path.join(__dirname, 'client'),
+  devtool: "sourcemap",
   entry: [
     'webpack-hot-middleware/client',
-    path.join(__dirname + '/client/src/index.js')
+    path.join(__dirname, '/client/index.js')
   ],
   output: {
-    path: path.join(__dirname + '/dist'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/dist/'
   },
-  plugins : debug ? [
+  plugins : [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ] : [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false, compressor: { warnings: false } }) // Clean code without docBlocks
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
   ],
   module: {
     loaders: [
@@ -38,8 +36,7 @@ module.exports = {
         // JS
         test: /\.js$/,
         loaders: ["react-hot-loader/webpack", "babel-loader"],
-        exclude: /node_modules/,
-        include: path.join(__dirname + '/client/src')
+        include: path.join(__dirname, 'client')
       },
       // CSS
       {
@@ -58,5 +55,8 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("styles.css")
-  ]
+  ],
+  resolve: {
+      extensions: ['.js']
+  },
 };
