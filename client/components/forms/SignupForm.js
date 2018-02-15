@@ -1,7 +1,11 @@
 import React from "react";
-import { Form, Button, Dropdown } from "semantic-ui-react";
+import { Form, Button, Select } from "semantic-ui-react";
+import isEmail from "validator/lib/isEmail";
+import validator from "validator";
+import PropTypes from "prop-types";
 
 import { countryOptions } from '../../data/common';
+import InlineError from "../messages/InlineError";
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -11,12 +15,7 @@ class SignupForm extends React.Component {
         email: "",
         firstname: "",
         lastname: "",
-        username: "",
-        phoneNumber: "",
         dob: "",
-        country: "",
-        city: "",
-        address: "",
         password: "",
         confirmPassword: "",
       },
@@ -25,11 +24,44 @@ class SignupForm extends React.Component {
     };
   }
 
+  onChange = (e) => {
+    this.setState({
+      ...this.state,
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+    });
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const errors = this.validate(this.state.data);
+    this.setState({ errors });
+    if (Object.keys(errors).length === 0) {
+      this.setState({ loading: true });
+      this.props.submit(this.state.data);
+    }
+  }
+
+  validate = (data) => {
+    const errors = {};
+    if (!isEmail(data.email)) errors.email = "Invalid Email";
+    if (!data.email) errors.email = "Provide your email";
+    if (!validator.isAlpha(data.firstname)) errors.firstname = "Invalid name";
+    if (!data.firstname) errors.firstname = "Provide your firstname";
+    if (!validator.isAlpha(data.lastname)) errors.lastname = "Invalid name";
+    if (!data.lastname) errors.lastname = "Provide your lastname";
+    if (!data.password) errors.password = "Provide a password for security";
+    if (!data.confirmPassword) errors.confirmPassword = "Provide a perfect match of your current password";
+    if (!validator.equals(data.password, data.confirmPassword)) errors.confirmPassword = "Passwords do not match";
+    if (!data.dob) errors.dob = "Provide your Date of Birth";
+
+    return errors;
+  }
+
   render() {
     const { data, loading, errors } = this.state;
     return (
-        <Form size="small" unstackable={false} onSubmit={this.onSubmit} loading={loading}>
-          <Form.Field>
+        <Form size="tiny" unstackable={false} onSubmit={this.onSubmit} loading={loading}>
+          <Form.Field error={!!errors.firstname}>
             <label htmlFor="firstname">First Name</label>
             <input
               type="text"
@@ -39,8 +71,9 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
               value={data.firstname}
             />
+            { errors.firstname && <InlineError text={errors.firstname} /> }
           </Form.Field>
-          <Form.Field>
+          <Form.Field error={!!errors.lastname}>
             <label htmlFor="lastname">Last Name</label>
             <input
               type="text"
@@ -50,8 +83,9 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
               value={data.lastname}
             />
+            { errors.lastname && <InlineError text={errors.lastname} /> }
           </Form.Field>
-          <Form.Field>
+          <Form.Field error={!!errors.email}>
             <label htmlFor="email">Email</label>
             <input
               type="text"
@@ -61,60 +95,21 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
               value={data.email}
             />
+            { errors.email && <InlineError text={errors.email} /> }
           </Form.Field>
-          <Form.Field>
-            <label htmlFor="username">Username</label>
+          <Form.Field error={!!errors.dob}>
+            <label htmlFor="dob">Date of Birth</label>
             <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Provide your preferred username"
-              onChange={this.onChange}
-              value={data.username}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="dob">DOB</label>
-            <input
-              type="text"
+              type="date"
               name="dob"
               id="dob"
               placeholder="DD-MM-YYYY"
               onChange={this.onChange}
               value={data.dob}
             />
+            { errors.dob && <InlineError text={errors.dob} /> }
           </Form.Field>
-          <Form.Field>
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <input
-              type="text"
-              name="phoneNumber"
-              id="phoneNumber"
-              placeholder="Phone number"
-              onChange={this.onChange}
-              value={data.phoneNumber}
-            />
-          </Form.Field>
-          <Form.Field>
-          <label htmlFor="country">Select your country</label>
-            <Dropdown
-              selection
-              placeholder="Select your country..."
-              options={countryOptions}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="city">City/Town</label>
-            <input
-              type="text"
-              name="city"
-              id="city"
-              placeholder="City"
-              onChange={this.onChange}
-              value={data.city}
-            />
-          </Form.Field>
-          <Form.Field>
+          <Form.Field error={!!errors.password}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -124,8 +119,9 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
               value={data.password}
             />
+            { errors.password && <InlineError text={errors.password} /> }
           </Form.Field>
-          <Form.Field>
+          <Form.Field error={!!errors.confirmPassword}>
             <label htmlFor="password">Confirm Password</label>
             <input
               type="password"
@@ -135,11 +131,16 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
               value={data.confirmPassword}
             />
+            { errors.confirmPassword && <InlineError text={errors.confirmPassword} /> }
           </Form.Field>
-          <Button primary>Sign Up</Button>
+          <Button color="green" size="tiny">Sign Up</Button>
         </Form>
     );
   }
 }
+
+SignupForm.propTypes = {
+  submit: PropTypes.func.isRequired,
+};
 
 export default SignupForm;
