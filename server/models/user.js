@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import uniqueValidator from "mongoose-unique-validator";
 
 import privateKeys from "../../config/private_keys";
 
@@ -46,6 +47,20 @@ UserSchema.methods.setPassword = function setPassword(password) {
   this.passwordHash = bcrypt.hashSync(password, 10);
 };
 
+// Password validation
+UserSchema.methods.isValidPassword = function isValidPassword(password) {
+  return bcrypt.compareSync(password, this.passwordHash);
+};
+
+// Token out user data credentials
+UserSchema.methods.toJSON = function toJSON() {
+  return {
+    email: this.email,
+    confirmed: this.confirmed,
+    token: this.generateJWT(),
+  };
+};
+
 // Sign credentials
 UserSchema.methods.generateJWT = function generateJWT() {
   return jwt.sign({
@@ -63,5 +78,8 @@ UserSchema.methods.setConfirmationToken = function setConfirmationToken() {
 UserSchema.methods.generateConfirmationUrl = function generateConfirmationUrl() {
   return `${privateKeys.HOST}/confirmation/${this.confirmationToken}`;
 };
+
+// Uniqueness validation plugin
+UserSchema.plugin(uniqueValidator, { message: "This email is already taken" });
 
 export default mongoose.model("User", UserSchema);
