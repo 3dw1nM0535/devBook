@@ -1,10 +1,9 @@
 import React from "react";
-import { Form, Button, Select } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import isEmail from "validator/lib/isEmail";
 import validator from "validator";
 import PropTypes from "prop-types";
 
-import { countryOptions } from '../../data/common';
 import InlineError from "../messages/InlineError";
 
 class SignupForm extends React.Component {
@@ -37,7 +36,8 @@ class SignupForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data);
+      this.props.submit(this.state.data).catch(err =>
+        this.setState({ errors: err.response.data.errors, loading: false }));
     }
   }
 

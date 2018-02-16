@@ -1,8 +1,5 @@
 export const styles = {
-  loginPage: {
-    marginTop: "5em",
+  segment: {
+    marginTop: "10em",
   },
-  signupPage: {
-    marginTop: "5em",
-  }
-}
+};
