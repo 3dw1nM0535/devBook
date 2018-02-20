@@ -10,15 +10,24 @@ export const userLoggedIn = user => ({
 });
 
 export const login = credentials => dispatch =>
-  axios.post("/api/auth/login", { credentials }).then(res => res.data.user)
+  axios.post("/api/auth", { credentials }).then(res => res.data.user)
     .then((user) => {
       localStorage.token = user.token;
       dispatch(userLoggedIn(user));
     });
 
 export const signup = data => dispatch =>
-  axios.post("/api/auth/signup", { data }).then(res => res.data.user)
+  axios.post("/api/auth/users", { data }).then(res => res.data.user)
     .then((user) => {
       localStorage.token = user.token;
       dispatch(userLoggedIn(user));
     });
+
+export const forgotPasswordRequest = ({ email }) => () =>
+  axios.post("/api/auth/forgot-password", { email });
+
+export const resetPasswordRequest = data => () =>
+  axios.post("/api/auth/reset-password", { data });
+
+export const validateToken = token => () =>
+  axios.post("/api/auth/validate-token", { token });

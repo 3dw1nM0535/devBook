@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import LoginForm from "../forms/LoginForm";
 
@@ -16,6 +17,8 @@ class LoginPage extends React.Component {
       <Grid padded centered stackable>
         <Grid.Column width={7}>
           <LoginForm submit={this.submit} />
+
+          <Link to="/forgot-password">Forgot Password?</Link>
         </Grid.Column>
       </Grid>
     );

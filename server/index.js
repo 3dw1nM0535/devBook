@@ -48,8 +48,8 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(bodyParser.json());
 
 // Route mounting
-app.use("/api/auth/login", users);
-app.use("/api/auth/signup", auth);
+app.use("/api/auth", users);
+app.use("/api/auth/users", auth);
 
 // Any Route handler
 app.get("*", (req, res) => {

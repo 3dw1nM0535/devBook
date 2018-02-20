@@ -79,6 +79,18 @@ UserSchema.methods.generateConfirmationUrl = function generateConfirmationUrl() 
   return `${privateKeys.HOST}/confirmation/${this.confirmationToken}`;
 };
 
+// Generate password reset link
+UserSchema.methods.generatePasswordResetLink = function generatePasswordResetLink() {
+  return `${privateKeys.HOST}/forgot-password/${this.generatePasswordResetToken()}`;
+};
+
+// Generate reset password token
+UserSchema.methods.generatePasswordResetToken = function generatePasswordResetToken() {
+  return jwt.sign({
+    _id: this._id,
+  }, privateKeys.SECRET_KEY);
+};
+
 // Uniqueness validation plugin
 UserSchema.plugin(uniqueValidator, { message: "This email is already taken" });
 
