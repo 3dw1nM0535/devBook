@@ -34,7 +34,7 @@ router.post("/forgot-password", (req, res) => {
 
 // Validate token route handler
 router.post("/validate-token", (req, res) => {
-  jwt.verify(req.body.token, privateKeys.SECRET_KEY, (err, decoded) => {
+  jwt.verify(req.body.token, privateKeys.SECRET_KEY, err => {
     if (err) {
       res.status(401).json({});
     } else {
