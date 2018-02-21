@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { USER_LOGGED_IN } from "../types";
 
+// User login action creator
 export const userLoggedIn = user => ({
   type: USER_LOGGED_IN,
   user,
