@@ -1,14 +1,6 @@
-// User login and signup actions
-
 import axios from "axios";
 
-import { USER_LOGGED_IN } from "../types";
-
-// User login action creator
-export const userLoggedIn = user => ({
-  type: USER_LOGGED_IN,
-  user,
-});
+import { userLoggedIn, userLoggedOut, userConfirmation } from "./actionCreators";
 
 // User Login action
 export const login = credentials => dispatch =>
@@ -17,6 +9,12 @@ export const login = credentials => dispatch =>
       localStorage.token = user.token;
       dispatch(userLoggedIn(user));
     });
+
+// User logout action
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("token");
+  dispatch(userLoggedOut());
+};
 
 // User Signup action
 export const signup = data => dispatch =>
@@ -37,3 +35,11 @@ export const resetPasswordRequest = data => () =>
 // Validate token action
 export const validateToken = token => () =>
   axios.post("/api/auth/validate-token", { token });
+
+// Confirm Email action
+export const confirmEmail = token => dispatch =>
+  axios.post("/api/auth/confirmation", { token }).then(res => res.data.user)
+    .then((user) => {
+      localStorage.token = user.token;
+      dispatch(userConfirmation(user));
+    });

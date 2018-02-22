@@ -8,7 +8,7 @@ import privateKeys from "../../config/private_keys";
 
 const router = express.Router();
 
-
+// User login route handler
 router.post("/", (req, res) => {
   const { credentials } = req.body;
   User.findOne({ email: credentials.email }).then((user) => {
@@ -18,6 +18,12 @@ router.post("/", (req, res) => {
       res.status(400).json({ errors: { global: "Invalid credentials" } });
     }
   });
+});
+
+// Email confirmation route handler
+router.post("/confirmation", (req, res) => {
+  User.findOneAndUpdate({ confirmationToken: req.body.token }, { confirmed: true, confirmationToken: "" }, { new: true })
+    .then(user => user ? res.json({ user: user.toJSON() }) : res.status(400).json({}));
 });
 
 // Forgot password route handler

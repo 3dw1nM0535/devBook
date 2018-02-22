@@ -22,9 +22,9 @@ export function sendConfirmationEmail(user) {
     from,
     to: user.email,
     subject: "Welcome to Events.com",
-    text: `
-      Welcome to Events.com. Please confirm your email.
-      ${user.generateConfirmationUrl()}
+    html: `
+      <p>Welcome to Events.com. Click the below link to confirm your email.</p>
+      <a href='${user.generateConfirmationUrl()}'>Email confirmation</a>
     `,
   };
 
@@ -37,9 +37,9 @@ export function sendResetPasswordEmail(user) {
     from,
     to: user.email,
     subject: "Password reset link.",
-    text: `
-      Please click the link below to reset your password.
-      ${user.generatePasswordResetLink()}
+    html: `
+      <p>Please click the link below to reset your password.</p>
+      <a href='${user.generatePasswordResetLink()}'>Reset password</a>
     `,
   };
 

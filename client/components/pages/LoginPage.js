@@ -18,7 +18,7 @@ class LoginPage extends React.Component {
         <Grid.Column width={7}>
           <LoginForm submit={this.submit} />
 
-          <Link to="/forgot-password">Forgot Password?</Link>
+          <Link to="/forgot-password">Forgot Password?</Link> or <Link to="/signup">Create an Account</Link>
         </Grid.Column>
       </Grid>
     );

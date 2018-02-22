@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Message } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import isEmail from "validator/lib/isEmail";
 
@@ -38,7 +38,6 @@ class ForgotPasswordForm extends React.Component {
   validate = (data) => {
     const errors = {};
 
-    if (!data.email) errors.email = "Can't be Blank";
     if (!isEmail(data.email)) errors.email = "Invalid Email";
 
     return errors;
@@ -49,6 +48,11 @@ class ForgotPasswordForm extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit} loading={loading} size="tiny">
+        { errors.global && (
+          <Message negative>
+            <p>{errors.global}</p>
+          </Message>
+        )}
         <Form.Field error={!!errors.email}>
           <label htmlFor="email">Email</label>
           <input

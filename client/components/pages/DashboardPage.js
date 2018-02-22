@@ -1,12 +1,32 @@
 import React from "react";
-import { Header } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 
 class DashboardPage extends React.Component {
-  render () {
+  render() {
+    const { isConfirmed } = this.props;
+
     return (
-      <Header as="h2">Welcome</Header>
+      <Grid padded centered stackable columns={1}>
+        <Grid.Column>
+          { !isConfirmed && <ConfirmEmailMessage /> }
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
-export default DashboardPage;
+function mapStateToProps(state) {
+  return {
+    isConfirmed: state.user.confirmed,
+  };
+}
+
+DashboardPage.propTypes = {
+  isConfirmed: PropTypes.bool.isRequired,
+};
+
+export default connect(mapStateToProps)(DashboardPage);
