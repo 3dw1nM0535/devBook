@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, 'client'),
-  devtool: "sourcemap",
+  devtool: "eval-source-map",
   entry: [
     'webpack-hot-middleware/client',
     path.join(__dirname, '/client/index.js')
@@ -17,6 +17,10 @@ module.exports = {
     publicPath: '/dist/'
   },
   plugins : [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      __DEV__: true,
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
@@ -57,6 +61,6 @@ module.exports = {
     new ExtractTextPlugin("styles.css")
   ],
   resolve: {
-      extensions: ['.js']
+      extensions: ['*', '.js', '.jsx', '.json']
   },
 };

@@ -1,5 +1,5 @@
 export const styles = {
   segment: {
-    marginTop: "10em",
+    marginTop: "5em",
   },
 };

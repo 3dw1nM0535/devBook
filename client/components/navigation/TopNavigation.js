@@ -23,9 +23,8 @@ class TopNavigation extends React.Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu pointing secondary>
-        <Container>
-          <Menu.Item as={Link} active={activeItem === "Home"} to="/dashboard" name="Home" onClick={this.handleItemClick} />
+      <Menu pointing secondary stackable>
+        <Menu.Item as={Link} active={activeItem === "Home"} to="/dashboard" name="Home" onClick={this.handleItemClick} />
           <Menu.Menu position="right">
             <Dropdown trigger={<Image avatar src={gravatarUrl(user.email)} />}>
               <Dropdown.Menu>
@@ -33,7 +32,6 @@ class TopNavigation extends React.Component {
               </Dropdown.Menu>
             </Dropdown>
           </Menu.Menu>
-        </Container>
       </Menu>
     );
   }

@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import TopNavigation from "./components/navigation/TopNavigation";
+import NavBar from "./components/navigation/NavBar";
 
 import GuestRoute from "./components/routes/GuestRoutes";
 import UserRoute from "./components/routes/UserRoutes";
@@ -18,7 +19,7 @@ import ConfirmationPage from "./components/pages/ConfirmationPage";
 
 const App = ({ location, isAuthenticated }) => (
   <div className="ui container">
-    { isAuthenticated && <TopNavigation /> }
+    { !isAuthenticated ? <NavBar /> : <TopNavigation /> }
     <GuestRoute location={location} path="/" exact component={HomePage} />
     <UserRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
