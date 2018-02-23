@@ -3,6 +3,8 @@ import path from "path";
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import https from "https";
+import fs from "fs";
 
 // Webpack assets configurations/Middleware
 import webpack from "webpack";
@@ -22,6 +24,12 @@ config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 // Connect to database
 mongoose.connect(privateKeys.MONGO_URI);
+
+// Certificate options
+const certOptions = {
+  key: fs.readFileSync(path.resolve("config/server.key")),
+  cert: fs.readFileSync(path.resolve("config/server.crt")),
+};
 
 
 // Init express module
@@ -56,11 +64,5 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Start server on port defined
-app.listen(port, () => {
-  console.log(`
-    ####################
-    #  Server Running  #
-    ####################
-  `);
-});
+// Start server on defined port
+https.createServer(certOptions, app).listen(port);

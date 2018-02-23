@@ -94,4 +94,4 @@ UserSchema.methods.generatePasswordResetToken = function generatePasswordResetTo
 // Uniqueness validation plugin
 UserSchema.plugin(uniqueValidator, { message: "This email is already taken" });
 
-export default mongoose.model("User", UserSchema);
+export default mongoose.model("Attendee", UserSchema);

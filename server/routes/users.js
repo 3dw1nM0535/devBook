@@ -2,7 +2,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 
-import User from "../models/user";
+import Attendee from "../models/Attendee";
 import { sendResetPasswordEmail } from "../mailer/authMailer";
 import privateKeys from "../../config/private_keys";
 
@@ -11,7 +11,7 @@ const router = express.Router();
 // User login route handler
 router.post("/", (req, res) => {
   const { credentials } = req.body;
-  User.findOne({ email: credentials.email }).then((user) => {
+  Attendee.findOne({ email: credentials.email }).then((user) => {
     if (user && user.isValidPassword(credentials.password)) {
       res.json({ user: user.toJSON() });
     } else {
@@ -22,13 +22,13 @@ router.post("/", (req, res) => {
 
 // Email confirmation route handler
 router.post("/confirmation", (req, res) => {
-  User.findOneAndUpdate({ confirmationToken: req.body.token }, { confirmed: true, confirmationToken: "" }, { new: true })
+  Attendee.findOneAndUpdate({ confirmationToken: req.body.token }, { confirmed: true, confirmationToken: "" }, { new: true })
     .then(user => user ? res.json({ user: user.toJSON() }) : res.status(400).json({}));
 });
 
 // Forgot password route handler
 router.post("/forgot-password", (req, res) => {
-  User.findOne({ email: req.body.email }).then((user) => {
+  Attendee.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       sendResetPasswordEmail(user);
       res.json({});
