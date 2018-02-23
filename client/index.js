@@ -7,7 +7,7 @@ import decode from "jwt-decode";
 
 import "semantic-ui-css/semantic.min.css";
 import { userLoggedIn } from "./actions/actionCreators";
-import configureStore from "./configureStore";
+import configureStore from "./store";
 
 import App from "./App";
 
