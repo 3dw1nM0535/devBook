@@ -1,23 +1,17 @@
 // Wrap main component to Redux store Provider and render to the DOM
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
 import { BrowserRouter, Route } from "react-router-dom";
 import decode from "jwt-decode";
 
 import "semantic-ui-css/semantic.min.css";
-import rootReducer from "./reducers/rootReducer";
 import { userLoggedIn } from "./actions/actionCreators";
+import configureStore from "./configureStore";
 
 import App from "./App";
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
-);
+const store = configureStore();
 
 if (localStorage.token) {
   const payload = decode(localStorage.token);
@@ -26,11 +20,11 @@ if (localStorage.token) {
 }
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
+  <Provider store={store}>
+    <BrowserRouter>
       <Route component={App} />
-    </Provider>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root"),
 );
 

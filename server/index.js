@@ -48,6 +48,7 @@ app.use(webpackHotMiddleware(compiler));
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   hot: true,
+  historyApiFallback: true,
   publicPath: config.output.publicPath,
   host: "localhost",
 }));
