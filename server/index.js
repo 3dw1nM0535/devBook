@@ -27,8 +27,8 @@ mongoose.connect(privateKeys.MONGO_URI);
 
 // Certificate options
 const certOptions = {
-  key: fs.readFileSync(path.resolve("config/server.key")),
-  cert: fs.readFileSync(path.resolve("config/server.crt")),
+  pfx: fs.readFileSync(path.resolve("config/localhost.pfx")),
+  passphrase: "#03167@TuK2019",
 };
 
 
@@ -64,5 +64,8 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// Init server
+const server = https.createServer(certOptions, app);
+
 // Start server on defined port
-https.createServer(certOptions, app).listen(port);
+server.listen(port);
