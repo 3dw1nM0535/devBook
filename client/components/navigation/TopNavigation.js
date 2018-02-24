@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import gravatarUrl from "gravatar-url";
 
-import * as actions from "../../actions/auth";
+import * as actions from "../../actions/authUser";
 
 class TopNavigation extends React.Component {
   constructor(props) {

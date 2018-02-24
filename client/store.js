@@ -8,11 +8,17 @@ import rootReducer from "./reducers/rootReducer";
 const loggerMiddleware = createLogger();
 
 export default function configureStore() {
-  return createStore(
+  const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(
-      thunkMiddleware,
-      loggerMiddleware,
-    )),
+    composeWithDevTools(applyMiddleware(thunkMiddleware, loggerMiddleware)),
   );
+
+  if (module.hot) {
+    module.hot.accept("./reducers/rootReducer", () => {
+      const nextRootReducer = require("./reducers/rootReducer");
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+
+  return store;
 }

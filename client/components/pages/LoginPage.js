@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import LoginForm from "../forms/LoginForm";
 
-import { login } from "../../actions/auth";
+import { login } from "../../actions/authUser";
 
 
 class LoginPage extends React.Component {

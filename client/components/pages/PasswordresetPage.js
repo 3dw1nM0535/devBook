@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import PasswordresetForm from "../forms/PasswordresetForm";
-import { resetPasswordRequest, validateToken } from "../../actions/auth";
+import { resetPasswordRequest, validateToken } from "../../actions/authUser";
 
 class PasswordresetPage extends React.Component {
   constructor(props) {

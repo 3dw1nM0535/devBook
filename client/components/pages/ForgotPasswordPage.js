@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import ForgotPasswordForm from "../forms/ForgotPasswordForm";
-import { forgotPasswordRequest } from "../../actions/auth";
+import { forgotPasswordRequest } from "../../actions/authUser";
 
 class ForgotPasswordPage extends React.Component {
   constructor(props) {
