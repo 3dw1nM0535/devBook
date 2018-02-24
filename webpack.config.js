@@ -5,7 +5,6 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  context: path.join(__dirname, 'client'),
   devtool: "eval-source-map",
   entry: [
     'webpack-hot-middleware/client',
@@ -27,6 +26,7 @@ module.exports = {
   ],
   module: {
     loaders: [
+      // Misc
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         use: {
@@ -35,6 +35,11 @@ module.exports = {
             limit: 100000,
           },
         },
+      },
+      // JSX
+      {
+        test: /\.jsx?$/,
+        use: ['react-hot-loader/webpack'],
       },
       {
         // JS
