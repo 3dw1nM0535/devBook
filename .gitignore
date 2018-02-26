@@ -6,7 +6,7 @@ build
 lib
 coverage
 .env
-*.log
+npm-debug.log*
 .DS_Store
 *.key
 *.crt
