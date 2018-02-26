@@ -15,8 +15,6 @@ import config from "../webpack.config";
 // Routes
 import auth from "./routes/User/auth";
 import users from "./routes/User/users";
-import companyAuth from "./routes/Company/auth";
-import companies from "./routes/Company/companies";
 
 
 // Module import
@@ -61,8 +59,6 @@ app.use(bodyParser.json());
 // Route mounting
 app.use("/api/auth", users);
 app.use("/api/auth/users", auth);
-app.use("/api/company/auth", companyAuth);
-app.use("/api/company/auth/companies", companies);
 
 // Any Route handler
 app.get("*", (req, res) => {

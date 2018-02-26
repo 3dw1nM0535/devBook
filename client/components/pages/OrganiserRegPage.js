@@ -3,9 +3,6 @@ import { Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import OrganiserRegForm from "../forms/OrganiserRegForm";
-import { register } from "../../actions/authOrg";
-
 class OrganiserRegPage extends React.Component {
   submit = data => this.props.register(data).then(() => this.props.history.push("/organiser/dashboard"));
 

@@ -7,8 +7,6 @@ import NavBar from "./components/navigation/NavBar";
 
 import GuestRoute from "./components/routes/GuestRoutes";
 import UserRoute from "./components/routes/UserRoutes";
-import OrgRoute from "./components/routes/OrgRoutes";
-import GuestOrgRoute from "./components/routes/GuestOrgRoutes";
 
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
@@ -17,8 +15,6 @@ import AttendeeDashboardPage from "./components/pages/AttendeeDashboardPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import PasswordresetPage from "./components/pages/PasswordresetPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
-import OrganiserRegPage from "./components/pages/OrganiserRegPage";
-import OrganiserDashboardPage from "./components/pages/OrganiserDashboardPage";
 
 const App = ({ location, isAuthenticated }) => (
   <div className="ui container">
@@ -30,8 +26,6 @@ const App = ({ location, isAuthenticated }) => (
     <GuestRoute location={location} path="/forgot-password" exact component={ForgotPasswordPage} />
     <GuestRoute location={location} path="/forgot-password/:token" exact component={PasswordresetPage} />
     <UserRoute location={location} path="/dashboard" exact component={AttendeeDashboardPage} />
-    <GuestOrgRoute location={location} path="/organiser" exact component={OrganiserRegPage} />
-    <OrgRoute location={location} path="/organiser/dashboard" exact component={OrganiserDashboardPage} />
   </div>
 );
 

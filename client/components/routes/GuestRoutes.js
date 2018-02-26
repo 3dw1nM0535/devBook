@@ -17,7 +17,7 @@ const GuestRoute = ({ isAuthenticated, component: Component, ...rest }) => (
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.company.token,
+    isAuthenticated: !!state.user.token,
   };
 }
 

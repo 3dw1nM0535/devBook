@@ -2,16 +2,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import decode from "jwt-decode";
+import createHistory from "history/createBrowserHistory";
 
 import "semantic-ui-css/semantic.min.css";
 import { userLoggedIn } from "./actions/actionCreators";
-import configureStore from "./store";
+import configureStore from "./store/store";
 
 import App from "./App";
 
 const store = configureStore();
+const history = createHistory();
 
 if (localStorage.token) {
   const payload = decode(localStorage.token);
@@ -21,9 +23,9 @@ if (localStorage.token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <Route component={App} />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById("root"),
 );
