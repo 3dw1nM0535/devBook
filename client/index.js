@@ -13,6 +13,8 @@ import configureStore from "./store/store";
 import App from "./App";
 
 const store = configureStore();
+
+// Create an enhanced history that syncs navigation events with our store
 const history = createHistory();
 
 if (localStorage.token) {
@@ -23,6 +25,7 @@ if (localStorage.token) {
 
 ReactDOM.render(
   <Provider store={store}>
+    { /* Tell the Router to use our enhanced history */ }
     <Router history={history}>
       <Route component={App} />
     </Router>

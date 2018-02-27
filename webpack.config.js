@@ -11,9 +11,9 @@ module.exports = {
     path.join(__dirname, '/client/index.js')
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/build/'
   },
   plugins : [
     new webpack.DefinePlugin({

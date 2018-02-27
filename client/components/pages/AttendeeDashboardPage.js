@@ -2,10 +2,18 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import io from "socket.io-client";
 
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 
 class AttendeeDashboardPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.socket = io("https://localhost:8080");
+  }
+
   render() {
     const { isConfirmed } = this.props;
 

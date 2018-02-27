@@ -6,7 +6,7 @@
   "scripts": {
     "build:webpack": "webpack --config webpack.config.js",
     "build": "npm run clean && npm run build:webpack",
-    "clean": "rimraf dist",
+    "clean": "rimraf build",
     "start": "nodemon --watch server --exec babel-node server/index.js",
     "lint": "eslint client/src server config"
   },
@@ -72,6 +72,8 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.14",
     "semantic-ui-react": "^0.78.2",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
     "validator": "^9.4.0",
     "webpack": "^3.11.0",
     "webpack-dev-middleware": "^2.0.5",

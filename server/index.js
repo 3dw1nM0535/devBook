@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import https from "https";
 import fs from "fs";
+import socket from "socket.io";
 
 // Webpack assets configurations/Middleware
 import webpack from "webpack";
@@ -19,6 +20,7 @@ import users from "./routes/User/users";
 
 // Module import
 import privateKeys from "../config/private_keys";
+import { onConnect } from "./utils/socket";
 
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
@@ -34,6 +36,9 @@ const certOptions = {
 
 // Init express module
 const app = express();
+
+// Serve static files
+app.use(express.static(path.resolve(__dirname, "public")));
 
 // Config port
 const port = privateKeys.PORT;
@@ -60,13 +65,14 @@ app.use(bodyParser.json());
 app.use("/api/auth", users);
 app.use("/api/auth/users", auth);
 
-// Any Route handler
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
 // Init server
 const server = https.createServer(certOptions, app);
+
+// IO setup
+const io = socket(server);
+
+// IO Init
+io.on("connection", onConnect);
 
 // Start server on defined port
 server.listen(port);
