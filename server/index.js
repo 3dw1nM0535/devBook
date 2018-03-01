@@ -66,10 +66,19 @@ app.use(bodyParser.json());
 app.use("/api/auth", users);
 app.use("/api/auth/users", auth);
 
+// Any route handler Middleware
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "public/index.html"));
+});
+
 // Init server
 const server = https.createServer(certOptions, app);
 
 // IO Init
+const io = Socket(server);
+
+// Listen for socket connetion
+io.on("connection", onConnect);
 
 // Start server on defined port
 server.listen(port);
