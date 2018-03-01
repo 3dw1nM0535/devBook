@@ -44,6 +44,7 @@
     "url-loader": "^0.6.2"
   },
   "dependencies": {
+    "autoprefixer": "^8.0.0",
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-polyfill": "^6.26.0",
@@ -59,6 +60,8 @@
     "mongoose": "^5.0.6",
     "mongoose-unique-validator": "^2.0.0",
     "nodemailer": "^4.4.2",
+    "postcss-flexbugs-fixes": "^3.3.0",
+    "postcss-loader": "^2.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

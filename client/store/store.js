@@ -12,12 +12,5 @@ export default function configureStore() {
     composeWithDevTools(applyMiddleware(thunkMiddleware, loggerMiddleware)),
   );
 
-  if (module.hot) {
-    module.hot.accept("../reducers/rootReducer", () => {
-      const nextReducer = require("../reducers/rootReducer").default;
-      store.replaceReducer(nextReducer);
-    });
-  }
-
   return store;
 }

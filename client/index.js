@@ -2,9 +2,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { Router, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import decode from "jwt-decode";
-import createHistory from "history/createBrowserHistory";
 
 import "semantic-ui-css/semantic.min.css";
 import { userLoggedIn } from "./actions/actionCreators";
@@ -15,7 +14,6 @@ import App from "./App";
 const store = configureStore();
 
 // Create an enhanced history that syncs navigation events with our store
-const history = createHistory();
 
 if (localStorage.token) {
   const payload = decode(localStorage.token);
@@ -25,14 +23,16 @@ if (localStorage.token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    { /* Tell the Router to use our enhanced history */ }
-    <Router history={history}>
+    <BrowserRouter>
       <Route component={App} />
-    </Router>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root"),
 );
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept("./App", () => {
+    const nextReducer = require("./App").default;
+    store.replaceRducer(nextReducer);
+  });
 }
