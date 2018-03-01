@@ -2,6 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require("autoprefixer");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -26,45 +27,24 @@ module.exports = {
   ],
   module: {
     loaders: [
-      // Misc
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 100000,
-          },
-        },
-      },
-      // JSX
-      {
-        test: /\.jsx?$/,
-        use: ['react-hot-loader/webpack'],
-      },
+      { test: /\.(woff2?|svg|jpe?g|png|gif|ico|eot|ttf)$/, loader: 'url-loader?limit=10000' },
       {
         // JS
         test: /\.js$/,
-        loaders: ["react-hot-loader/webpack", "babel-loader"],
-        include: path.join(__dirname, 'client')
+        loaders: ["react-hot-loader/webpack", "babel-loader?" + JSON.stringify({ cacheDirectory: true }), ],
+        include: path.join(__dirname, 'client'),
       },
       // CSS
       {
-        test: /\.css$/,
-        include: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader"
-            }
-          ],
-        })
-      }
+        test:/\.css$/,
+        use: [
+          "style-loader",
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          { loader: "postcss-loader", options: { ident: "postcss", plugins: () => [ require("postcss-flexbugs-fixes"), autoprefixer({ browsers: [ ">1%", "last 4 versions", "Firefox ESR", "not ie < 9" ], flexbox: "no-2009" }), ], }, },
+        ]
+      },
     ]
   },
-  plugins: [
-    new ExtractTextPlugin("styles.css")
-  ],
   resolve: {
       extensions: ['*', '.js', '.jsx', '.json']
   },
