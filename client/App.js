@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import TopNavigation from "./components/navigation/TopNavigation";
 import NavBar from "./components/navigation/NavBar";
@@ -42,4 +43,4 @@ App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

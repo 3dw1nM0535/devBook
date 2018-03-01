@@ -7,8 +7,10 @@ import { routerMiddleware } from "react-router-redux";
 
 import rootReducer from "../reducers/rootReducer";
 
+export const history = createHistory();
+
 const loggerMiddleware = createLogger();
-const historyMiddleware = routerMiddleware(createHistory());
+const historyMiddleware = routerMiddleware(history);
 
 export default function configureStore() {
   const store = createStore(

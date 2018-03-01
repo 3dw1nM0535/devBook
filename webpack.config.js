@@ -20,7 +20,6 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development'),
       __DEV__: true,
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
   ],
