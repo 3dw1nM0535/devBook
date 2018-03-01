@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import https from "https";
 import fs from "fs";
-import socket from "socket.io";
+import Socket from "socket.io";
 
 // Webpack assets configurations/Middleware
 import webpack from "webpack";
@@ -53,6 +53,7 @@ app.use(webpackHotMiddleware(compiler));
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   hot: true,
+  compress: true,
   historyApiFallback: true,
   publicPath: config.output.publicPath,
   host: "localhost",
@@ -68,11 +69,7 @@ app.use("/api/auth/users", auth);
 // Init server
 const server = https.createServer(certOptions, app);
 
-// IO setup
-const io = socket(server);
-
 // IO Init
-io.on("connection", onConnect);
 
 // Start server on defined port
 server.listen(port);
