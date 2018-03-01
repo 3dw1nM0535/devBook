@@ -18,7 +18,7 @@ class AttendeeDashboardPage extends React.Component {
     const { isConfirmed } = this.props;
 
     return (
-      <Grid padded centered stackable columns={1}>
+      <Grid padded centered stackable>
         <Grid.Column>
           { !isConfirmed && <ConfirmEmailMessage /> }
         </Grid.Column>
