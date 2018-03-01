@@ -20,7 +20,7 @@ import users from "./routes/User/users";
 
 // Module import
 import privateKeys from "../config/private_keys";
-import { onConnect } from "./utils/socket";
+import { onConnect } from "./utils/socket-io";
 
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
