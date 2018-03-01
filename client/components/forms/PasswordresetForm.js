@@ -51,7 +51,7 @@ class PasswordresetForm extends React.Component {
     const { data, loading, errors } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit} size="tiny" unstackable={false} loading={loading}>
+      <Form onSubmit={this.onSubmit} unstackable={false} loading={loading}>
         <Form.Field error={!!errors.newPassword}>
           <label htmlFor="newPassword">New Password</label>
           <input
@@ -76,7 +76,7 @@ class PasswordresetForm extends React.Component {
           />
           { errors.confirmNewPassword && <InlineError text={errors.confirmNewPassword} /> }
         </Form.Field>
-        <Button size="tiny" color="green">Reset Password</Button>
+        <Button color="green">Reset Password</Button>
       </Form>
     );
   }

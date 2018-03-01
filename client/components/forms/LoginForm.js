@@ -49,7 +49,7 @@ class LoginForm extends React.Component {
   render() {
     const { data, loading, errors } = this.state;
     return (
-        <Form size="tiny" unstackable={false} onSubmit={this.onSubmit} loading={loading}>
+        <Form unstackable={false} onSubmit={this.onSubmit} loading={loading}>
         { errors.global && (
           <Message negative>
             <Message.Header>Something went wrong</Message.Header>
@@ -81,7 +81,7 @@ class LoginForm extends React.Component {
             />
           { errors.password && <InlineError text={errors.password} /> }
           </Form.Field>
-          <Button size="tiny" color="green">Login</Button>
+          <Button color="green">Login</Button>
         </Form>
     );
   }

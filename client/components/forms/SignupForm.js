@@ -60,7 +60,7 @@ class SignupForm extends React.Component {
   render() {
     const { data, loading, errors } = this.state;
     return (
-        <Form size="tiny" unstackable={false} onSubmit={this.onSubmit} loading={loading}>
+        <Form unstackable={false} onSubmit={this.onSubmit} loading={loading}>
           <Form.Field error={!!errors.firstname}>
             <label htmlFor="firstname">First Name</label>
             <input
@@ -133,7 +133,7 @@ class SignupForm extends React.Component {
             />
             { errors.confirmPassword && <InlineError text={errors.confirmPassword} /> }
           </Form.Field>
-          <Button color="green" size="tiny">Sign Up</Button>
+          <Button color="green">Sign Up</Button>
         </Form>
     );
   }

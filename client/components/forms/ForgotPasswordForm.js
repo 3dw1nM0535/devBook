@@ -47,7 +47,7 @@ class ForgotPasswordForm extends React.Component {
     const { data, errors, loading } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit} loading={loading} size="tiny">
+      <Form onSubmit={this.onSubmit} loading={loading}>
         { errors.global && (
           <Message negative>
             <p>{errors.global}</p>
@@ -65,7 +65,7 @@ class ForgotPasswordForm extends React.Component {
           />
           { errors.email && <InlineError text={errors.email} /> }
         </Form.Field>
-        <Button size="tiny" color="green">Send Password Reset Email</Button>
+        <Button color="green">Send Password Reset Email</Button>
       </Form>
     );
   }

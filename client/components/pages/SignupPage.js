@@ -1,7 +1,8 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import SignupForm from '../forms/SignupForm';
 
@@ -14,7 +15,9 @@ class SignupPage extends React.Component {
     return (
       <Grid padded centered stackable>
         <Grid.Column width={7}>
+          <Header as="h2">Sign Up</Header>
           <SignupForm submit={this.submit} />
+          <p>Already have an Account? Proceed to <Link to="/login">Login</Link></p>
         </Grid.Column>
       </Grid>
     );
