@@ -53,10 +53,8 @@ app.use(webpackHotMiddleware(compiler));
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   hot: true,
-  compress: true,
   historyApiFallback: true,
   publicPath: config.output.publicPath,
-  host: "localhost",
 }));
 
 // Parse application-json data
