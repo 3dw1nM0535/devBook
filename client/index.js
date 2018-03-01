@@ -2,7 +2,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
+import { Router, Route } from "react-router-dom";
 import decode from "jwt-decode";
 
 import "semantic-ui-css/semantic.min.css";
@@ -12,6 +13,7 @@ import configureStore from "./store/store";
 import App from "./App";
 
 const store = configureStore();
+const history = createHistory();
 
 // Create an enhanced history that syncs navigation events with our store
 
@@ -23,9 +25,9 @@ if (localStorage.token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <Route component={App} />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById("root"),
 );
