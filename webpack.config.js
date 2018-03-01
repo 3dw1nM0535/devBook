@@ -3,7 +3,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require("autoprefixer");
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: "eval-source-map",
@@ -40,7 +39,20 @@ module.exports = {
         use: [
           "style-loader",
           { loader: "css-loader", options: { importLoaders: 1 } },
-          { loader: "postcss-loader", options: { ident: "postcss", plugins: () => [ require("postcss-flexbugs-fixes"), autoprefixer({ browsers: [ ">1%", "last 4 versions", "Firefox ESR", "not ie < 9" ], flexbox: "no-2009" }), ], }, },
+          { loader: "postcss-loader", options: { ident: "postcss", plugins: () => [
+            require("postcss-flexbugs-fixes"),
+            autoprefixer({
+              browsers: [
+                ">1%",
+                "last 4 versions",
+                "Firefox ESR",
+                "not ie < 9"
+              ],
+              flexbox: "no-2009"
+            }),
+            ],
+          },
+        },
         ]
       },
     ]
