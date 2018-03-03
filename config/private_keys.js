@@ -13,4 +13,5 @@ module.exports = {
   EMAIL_PASS: process.env.EMAIL_PASS,
   SECRET_KEY: process.env.SECRET_KEY,
   HOST: process.env.HOST,
+  KEY: process.env.KEY,
 };

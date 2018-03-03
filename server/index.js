@@ -30,7 +30,7 @@ mongoose.connect(privateKeys.MONGO_URI);
 // Certificate options
 const certOptions = {
   pfx: fs.readFileSync(path.resolve("config/localhost.pfx")),
-  passphrase: "#03167@TuK2019",
+  passphrase: privateKeys.KEY,
 };
 
 
