@@ -38,6 +38,8 @@ module.exports = {
         use: [
           "style-loader",
           { loader: "css-loader", options: { importLoaders: 1 } },
+
+          // Configure for CSS imports to work
           { loader: "postcss-loader", options: { ident: "postcss", plugins: () => [
             require("postcss-flexbugs-fixes"),
             autoprefixer({
