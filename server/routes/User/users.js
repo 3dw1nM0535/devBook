@@ -23,7 +23,13 @@ router.post("/", (req, res) => {
 // Email confirmation route handler
 router.post("/confirmation", (req, res) => {
   Attendee.findOneAndUpdate({ confirmationToken: req.body.token }, { confirmed: true, confirmationToken: "" }, { new: true })
-    .then(user => user ? res.json({ user: user.toJSON() }) : res.status(400).json({}));
+    .then((user) => {
+      if (user) {
+        res.json({ user: user.toJSON() });
+      } else {
+        res.status(400).json({});
+      }
+    });
 });
 
 // Forgot password route handler
@@ -56,7 +62,7 @@ router.post("/reset-password", (req, res) => {
     if (err) {
       res.status(401).json({ errors: { global: "Invalid token" } });
     } else {
-      User.findOne({ _id: decoded._id }).then((user) => {
+      Attendee.findOne({ _id: decoded._id }).then((user) => {
         if (user) {
           user.setPassword(newPassword);
           user.save().then(() => res.json({}));
