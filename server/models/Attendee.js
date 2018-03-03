@@ -54,7 +54,11 @@ UserSchema.methods.isValidPassword = function isValidPassword(password) {
 
 // Return fullname
 UserSchema.methods.fullName = function fullName() {
-  return `${this.firstname} ${this.lastname}`;
+  return `${
+    this.firstname.charAt(0).toUpperCase() + this.firstname.substring(1)
+  } ${
+    this.lastname.charAt(0).toUpperCase() + this.lastname.substring(1)
+  }`;
 };
 
 // Token out user data credentials
