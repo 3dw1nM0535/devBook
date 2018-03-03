@@ -65,8 +65,8 @@ UserSchema.methods.fullName = function fullName() {
 UserSchema.methods.toJSON = function toJSON() {
   return {
     email: this.email,
-    fullname: this.fullName(),
     confirmed: this.confirmed,
+    fullname: this.fullName(),
     token: this.generateJWT(),
   };
 };
@@ -75,6 +75,7 @@ UserSchema.methods.toJSON = function toJSON() {
 UserSchema.methods.generateJWT = function generateJWT() {
   return jwt.sign({
     email: this.email,
+    fullname: this.fullName(),
     confirmed: this.confirmed,
   }, privateKeys.SECRET_KEY);
 };
