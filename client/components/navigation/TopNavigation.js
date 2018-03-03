@@ -22,12 +22,21 @@ class TopNavigation extends React.Component {
     const { logout, user } = this.props;
     const { activeItem } = this.state;
 
+    const trigger = (
+      <Image avatar src={gravatarUrl(user.email)} />
+    );
+
+    const text = (
+      <span>Signed in as <strong>{user.fullname}</strong></span>
+    );
+
     return (
       <Menu text>
         <Menu.Item as={Link} active={activeItem === "Home"} to="/dashboard" name="Home" onClick={this.handleItemClick} />
           <Menu.Menu position="right">
-            <Dropdown trigger={<Image avatar src={gravatarUrl(user.email)} />} pointing="top right" className="link item">
+            <Dropdown trigger={trigger} pointing="top right" className="link item">
               <Dropdown.Menu>
+                <Dropdown.Item text={text} disabled />
                 <Dropdown.Item text="Profile settings" icon="settings" as={Link} to="/profile" />
                 <Dropdown.Item text="Logout" onClick={() => logout()} icon="sign out"/>
               </Dropdown.Menu>

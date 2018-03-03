@@ -55,7 +55,7 @@ class PasswordresetForm extends React.Component {
         <Form.Field error={!!errors.newPassword}>
           <label htmlFor="newPassword">New Password</label>
           <input
-            type="text"
+            type="password"
             name="newPassword"
             id="newPassword"
             placeholder="New Password"
@@ -67,7 +67,7 @@ class PasswordresetForm extends React.Component {
         <Form.Field error={!!errors.confirmNewPassword}>
           <label htmlFor="confirmNewPassword">Confirm New Password</label>
           <input
-            type="text"
+            type="password"
             name="confirmNewPassword"
             id="confirmNewPassword"
             placeholder="Confirm New Password"

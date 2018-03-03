@@ -15,7 +15,12 @@ const store = configureStore();
 
 if (localStorage.token) {
   const payload = decode(localStorage.token);
-  const user = { token: localStorage.token, email: payload.email, confirmed: payload.confirmed };
+  const user = {
+    token: localStorage.token,
+    email: payload.email,
+    fullname: payload.fullname,
+    confirmed: payload.confirmed,
+  };
   store.dispatch(userLoggedIn(user));
 }
 
