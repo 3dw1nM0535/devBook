@@ -52,10 +52,16 @@ UserSchema.methods.isValidPassword = function isValidPassword(password) {
   return bcrypt.compareSync(password, this.passwordHash);
 };
 
+// Return fullname
+UserSchema.methods.fullName = function fullName() {
+  return `${this.firstname} ${this.lastname}`;
+};
+
 // Token out user data credentials
 UserSchema.methods.toJSON = function toJSON() {
   return {
     email: this.email,
+    fullname: this.fullName(),
     confirmed: this.confirmed,
     token: this.generateJWT(),
   };
