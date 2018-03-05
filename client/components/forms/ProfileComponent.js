@@ -33,7 +33,7 @@ class ProfileComponent extends React.Component {
         <p>
           Providing your Email address help u address authenticity across the platform. Also,
           detect any suspecious activities in your account.
-          The security team also communicate on any
+          The security team also communicates on any
           security issues belonging to your account using
           your official and verified email account.
         </p>
