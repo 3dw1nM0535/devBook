@@ -36,6 +36,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  profilePhoto: {
+    type: String,
+    default: "",
+  },
   dob: {
     type: Date,
     default: Date.now,
@@ -64,7 +68,9 @@ UserSchema.methods.fullName = function fullName() {
 // Token out user data credentials
 UserSchema.methods.toJSON = function toJSON() {
   return {
+    profilePhoto: this.profilePhoto,
     email: this.email,
+    _id: this._id,
     confirmed: this.confirmed,
     fullname: this.fullName(),
     token: this.generateJWT(),
@@ -74,6 +80,8 @@ UserSchema.methods.toJSON = function toJSON() {
 // Sign credentials
 UserSchema.methods.generateJWT = function generateJWT() {
   return jwt.sign({
+    _id: this._id,
+    profilePhoto: this.profilePhoto,
     email: this.email,
     fullname: this.fullName(),
     confirmed: this.confirmed,
