@@ -8,6 +8,7 @@ import decode from "jwt-decode";
 import "semantic-ui-css/semantic.min.css";
 import { userLoggedIn } from "./actions/actionCreators";
 import configureStore, { history } from "./store/store";
+import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 
 import App from "./App";
 
@@ -21,6 +22,7 @@ if (localStorage.token) {
     fullname: payload.fullname,
     confirmed: payload.confirmed,
   };
+  setAuthorizationHeader(localStorage.token);
   store.dispatch(userLoggedIn(user));
 }
 

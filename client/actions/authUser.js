@@ -1,12 +1,14 @@
 import axios from "axios";
 
 import { userLoggedIn, userLoggedOut, userConfirmation } from "./actionCreators";
+import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 // User Login action
 export const login = credentials => dispatch =>
   axios.post("/api/auth", { credentials }).then(res => res.data.user)
     .then((user) => {
       localStorage.token = user.token;
+      setAuthorizationHeader(user.token);
       dispatch(userLoggedIn(user));
     });
 
@@ -21,6 +23,7 @@ export const signup = data => dispatch =>
   axios.post("/api/auth/users", { data }).then(res => res.data.user)
     .then((user) => {
       localStorage.token = user.token;
+      setAuthorizationHeader(user.token);
       dispatch(userLoggedIn(user));
     });
 

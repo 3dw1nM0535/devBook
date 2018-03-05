@@ -16,17 +16,19 @@ import AttendeeDashboardPage from "./components/pages/AttendeeDashboardPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import PasswordresetPage from "./components/pages/PasswordresetPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
+import ProfilesettingsPage from "./components/pages/ProfilesettingsPage";
 
 const App = ({ location, isAuthenticated }) => (
   <div className="ui container">
     { !isAuthenticated ? <NavBar /> : <TopNavigation /> }
     <GuestRoute location={location} path="/" exact component={HomePage} />
-    <UserRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
     <GuestRoute location={location} path="/signup" exact component={SignupPage} />
     <GuestRoute location={location} path="/forgot-password" exact component={ForgotPasswordPage} />
     <GuestRoute location={location} path="/forgot-password/:token" exact component={PasswordresetPage} />
+    <UserRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
     <UserRoute location={location} path="/dashboard" exact component={AttendeeDashboardPage} />
+    <UserRoute location={location} path="/profile/settings" exact component={ProfilesettingsPage} />
   </div>
 );
 
