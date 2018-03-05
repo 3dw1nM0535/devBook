@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { userLoggedIn, userLoggedOut, userConfirmation } from "./actionCreators";
+import { userLoggedIn, userLoggedOut } from "./actionCreators";
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 // User Login action
@@ -44,5 +44,5 @@ export const confirmEmail = token => dispatch =>
   axios.post("/api/auth/confirmation", { token }).then(res => res.data.user)
     .then((user) => {
       localStorage.token = user.token;
-      dispatch(userConfirmation(user));
+      dispatch(userLoggedIn(user));
     });
