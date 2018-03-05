@@ -23,7 +23,7 @@ class TopNavigation extends React.Component {
     const { activeItem } = this.state;
 
     const trigger = (
-      <Image avatar src={gravatarUrl(user.email)} />
+      <Image avatar src={user.profilePhoto ? user.profilePhoto : gravatarUrl(user.email)} />
     );
 
     const text = (
@@ -58,7 +58,6 @@ function mapStateToProps(state) {
 TopNavigation.propTypes = {
   logout: PropTypes.func.isRequired,
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
   }).isRequired,
 };
 
