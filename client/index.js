@@ -18,6 +18,8 @@ if (localStorage.token) {
   const payload = decode(localStorage.token);
   const user = {
     token: localStorage.token,
+    _id: payload._id,
+    profilePhoto: payload.profilePhoto,
     email: payload.email,
     fullname: payload.fullname,
     confirmed: payload.confirmed,
