@@ -23,10 +23,7 @@ class TopNavigation extends React.Component {
     const { activeItem } = this.state;
 
     const trigger = (
-      <div>
-        <Image avatar src={user.profilePhoto ? user.profilePhoto : gravatarUrl(user.email)} />
-        <span>{user.fullname}</span>
-      </div>
+      <Image avatar src={gravatarUrl(user.email)} />
     );
 
     const text = (
@@ -34,7 +31,7 @@ class TopNavigation extends React.Component {
     );
 
     return (
-      <Menu text>
+      <Menu secondary>
           <Menu.Menu position="right">
             <Menu.Item as={Link} active={activeItem === "Home"} to="/dashboard" name="Home" onClick={this.handleItemClick} />
             <Menu.Item as={Link} active={activeItem === "Profile"} to="/profile" name="Profile" onClick={this.handleItemClick} />
@@ -42,7 +39,6 @@ class TopNavigation extends React.Component {
             <Dropdown trigger={trigger} pointing="top right" className="link item" icon={null}>
               <Dropdown.Menu>
                 <Dropdown.Item text={text} disabled />
-                <Dropdown.Item text="Profile settings" icon="settings" as={Link} to="/profile/settings" />
                 <Dropdown.Item text="Logout" onClick={() => logout()} icon="sign out"/>
               </Dropdown.Menu>
             </Dropdown>

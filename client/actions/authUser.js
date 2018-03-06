@@ -46,14 +46,3 @@ export const confirmEmail = token => dispatch =>
       localStorage.token = user.token;
       dispatch(userLoggedIn(user));
     });
-
-// Fetch user profile data
-export const fetchProfile = _id => () =>
-  axios.post("/api/auth/profile", { _id }).then(res => res.data.user);
-
-// Update user profile
-export const updateProfile = (data, file) => dispatch =>
-  axios.post("/api/auth/updateProfile", { data, file }).then(res => res.data.user)
-    .then((user) => {
-      dispatch(userLoggedIn(user));
-    });

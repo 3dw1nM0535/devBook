@@ -16,7 +16,7 @@ import AttendeeDashboardPage from "./components/pages/AttendeeDashboardPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import PasswordresetPage from "./components/pages/PasswordresetPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
-import ProfilesettingsPage from "./components/pages/ProfilesettingsPage";
+import ProfilePage from "./components/pages/ProfilePage";
 
 const App = ({ location, isAuthenticated }) => (
   <div className="ui container">
@@ -28,7 +28,7 @@ const App = ({ location, isAuthenticated }) => (
     <GuestRoute location={location} path="/forgot-password/:token" exact component={PasswordresetPage} />
     <UserRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
     <UserRoute location={location} path="/dashboard" exact component={AttendeeDashboardPage} />
-    <UserRoute location={location} path="/profile/settings" exact component={ProfilesettingsPage} />
+    <UserRoute location={location} path="/profile" exact component={ProfilePage} />
   </div>
 );
 
