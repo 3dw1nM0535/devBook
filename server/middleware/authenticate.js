@@ -22,6 +22,6 @@ export default (req, res, next) => {
       }
     });
   } else {
-    res.status(401).json({ errors: { global: "No token" } });
+    res.status(401).json({ errors: { global: "Invalid access" } });
   }
 };

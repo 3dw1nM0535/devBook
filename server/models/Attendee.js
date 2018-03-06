@@ -109,7 +109,7 @@ UserSchema.methods.generatePasswordResetLink = function generatePasswordResetLin
 UserSchema.methods.generatePasswordResetToken = function generatePasswordResetToken() {
   return jwt.sign({
     _id: this._id,
-  }, privateKeys.SECRET_KEY);
+  }, privateKeys.SECRET_KEY, { expiresIn: "24h" });
 };
 
 // Uniqueness validation plugin

@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import Attendee from "../../models/Attendee";
 import { sendResetPasswordEmail } from "../../mailer/authMailer";
 import privateKeys from "../../../config/private_keys";
+import isAuthenticated from "../../middleware/authenticate";
 
 const router = express.Router();
 
@@ -75,7 +76,7 @@ router.post("/reset-password", (req, res) => {
 });
 
 // Get user profile route handler
-router.post("/profile", (req, res) => {
+router.post("/profile", isAuthenticated, (req, res) => {
   Attendee.findOne({ _id: req.body._id }).then((user) => {
     if (user) {
       res.json({ user: user.toJSON() });
@@ -86,7 +87,7 @@ router.post("/profile", (req, res) => {
 });
 
 // Update user profile
-router.post("/updateProfile", (req, res) => {
+router.post("/updateProfile", isAuthenticated, (req, res) => {
   const { data } = req.body;
   const { file } = req.body;
 
