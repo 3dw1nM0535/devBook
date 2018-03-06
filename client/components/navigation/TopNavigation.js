@@ -23,7 +23,10 @@ class TopNavigation extends React.Component {
     const { activeItem } = this.state;
 
     const trigger = (
-      <Image avatar src={user.profilePhoto ? user.profilePhoto : gravatarUrl(user.email)} />
+      <div>
+        <Image avatar src={user.profilePhoto ? user.profilePhoto : gravatarUrl(user.email)} />
+        <span>{user.fullname}</span>
+      </div>
     );
 
     const text = (
@@ -35,7 +38,7 @@ class TopNavigation extends React.Component {
           <Menu.Menu position="right">
             <Menu.Item as={Link} active={activeItem === "Home"} to="/dashboard" name="Home" onClick={this.handleItemClick} />
             <Menu.Item as={Link} active={activeItem === "Profile"} to="/profile" name="Profile" onClick={this.handleItemClick} />
-            <Dropdown trigger="Notifications" pointing="top right" className="link item" icon={null}></Dropdown>
+            <Dropdown trigger="Notifications" pointing="top right" className="link item" icon={null} />
             <Dropdown trigger={trigger} pointing="top right" className="link item" icon={null}>
               <Dropdown.Menu>
                 <Dropdown.Item text={text} disabled />
