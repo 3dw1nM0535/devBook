@@ -74,4 +74,34 @@ router.post("/reset-password", (req, res) => {
   });
 });
 
+// Get user profile route handler
+router.post("/profile", (req, res) => {
+  Attendee.findOne({ _id: req.body._id }).then((user) => {
+    if (user) {
+      res.json({ user: user.toJSON() });
+    } else {
+      res.status(404).json({});
+    }
+  });
+});
+
+// Update user profile
+router.post("/updateProfile", (req, res) => {
+  const { data } = req.body;
+  const { file } = req.body;
+
+  Attendee.findOneAndUpdate({ _id: data._id }, {
+    firstname: data.firstname,
+    lastname: data.lastname,
+    email: data.email,
+    profilePhoto: file,
+  }, { new: true }).then((user) => {
+    if (user) {
+      res.json({ user: user.toJSON() });
+    } else {
+      res.json({});
+    }
+  });
+});
+
 export default router;

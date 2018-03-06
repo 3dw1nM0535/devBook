@@ -73,6 +73,8 @@ UserSchema.methods.toJSON = function toJSON() {
     _id: this._id,
     confirmed: this.confirmed,
     fullname: this.fullName(),
+    firstname: this.firstname,
+    lastname: this.lastname,
     token: this.generateJWT(),
   };
 };
