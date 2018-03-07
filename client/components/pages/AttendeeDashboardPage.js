@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Header, Segment, Image } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import io from "socket.io-client";
@@ -15,13 +15,23 @@ class AttendeeDashboardPage extends React.Component {
   }
 
   render() {
-    const { isConfirmed } = this.props;
+    const { isConfirmed, user } = this.props;
 
     return (
-      <Grid padded centered stackable>
-        <Grid.Column>
-          { !isConfirmed && <ConfirmEmailMessage /> }
-        </Grid.Column>
+      <Grid container divided stackable>
+				<Grid.Row columns={3}>
+					<Grid.Column width={4} textAlign="center" only="tablet mobile computer">
+						<Segment textAlign="center">
+							<Header as="h2">Profile section</Header>
+						</Segment>
+					</Grid.Column>
+					<Grid.Column width={8} textAlign="center">
+						<Header as="h2">Posts section</Header>
+					</Grid.Column>
+					<Grid.Column width={4} textAlign="center">
+						<Header as="h2">Push Notifications section</Header>
+					</Grid.Column>
+				</Grid.Row>
       </Grid>
     );
   }
@@ -29,7 +39,8 @@ class AttendeeDashboardPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isConfirmed: state.user.confirmed,
+		isConfirmed: state.user.confirmed,
+		user: state.user,
   };
 }
 

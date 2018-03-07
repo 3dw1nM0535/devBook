@@ -6,10 +6,8 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <Grid>
-        <Grid.Column width={4}>
-          <Header as="h2">Profile Page</Header>
-        </Grid.Column>
-      </Grid>
+				<Header as="h2">Profile page</Header>
+			</Grid>
     );
   }
 }
