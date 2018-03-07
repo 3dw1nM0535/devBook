@@ -5,28 +5,46 @@ import jwt from "jsonwebtoken";
 import Attendee from "../../models/Attendee";
 import { sendResetPasswordEmail } from "../../mailer/authMailer";
 import privateKeys from "../../../config/private_keys";
-import isAuthenticated from "../../middleware/authenticate";
 
 const router = express.Router();
 
 // User login route handler
 router.post("/", (req, res) => {
-  const { credentials } = req.body;
-  Attendee.findOne({ email: credentials.email }).then((user) => {
+  const {
+    credentials,
+  } = req.body;
+  Attendee.findOne({
+    email: credentials.email,
+  }).then((user) => {
     if (user && user.isValidPassword(credentials.password)) {
-      res.json({ user: user.toJSON() });
+      res.json({
+        user: user.toJSON(),
+      });
     } else {
-      res.status(400).json({ errors: { global: "Invalid credentials" } });
+      res.status(400).json({
+        errors: {
+          global: "Invalid credentials",
+        },
+      });
     }
   });
 });
 
 // Email confirmation route handler
 router.post("/confirmation", (req, res) => {
-  Attendee.findOneAndUpdate({ confirmationToken: req.body.token }, { confirmed: true, confirmationToken: "" }, { new: true })
+  Attendee.findOneAndUpdate({
+    confirmationToken: req.body.token,
+  }, {
+    confirmed: true,
+    confirmationToken: "",
+  }, {
+    new: true,
+  })
     .then((user) => {
       if (user) {
-        res.json({ user: user.toJSON() });
+        res.json({
+          user: user.toJSON(),
+        });
       } else {
         res.status(400).json({});
       }
@@ -35,12 +53,18 @@ router.post("/confirmation", (req, res) => {
 
 // Forgot password route handler
 router.post("/forgot-password", (req, res) => {
-  Attendee.findOne({ email: req.body.email }).then((user) => {
+  Attendee.findOne({
+    email: req.body.email,
+  }).then((user) => {
     if (user) {
       sendResetPasswordEmail(user);
       res.json({});
     } else {
-      res.status(400).json({ errors: { global: "No user with such an Email" } });
+      res.status(400).json({
+        errors: {
+          global: "No user with such an Email",
+        },
+      });
     }
   });
 });
@@ -58,17 +82,30 @@ router.post("/validate-token", (req, res) => {
 
 // Reset password route handler
 router.post("/reset-password", (req, res) => {
-  const { newPassword, token } = req.body.data;
+  const {
+    newPassword,
+    token,
+  } = req.body.data;
   jwt.verify(token, privateKeys.SECRET_KEY, (err, decoded) => {
     if (err) {
-      res.status(401).json({ errors: { global: "Invalid token" } });
+      res.status(401).json({
+        errors: {
+          global: "Invalid token",
+        },
+      });
     } else {
-      Attendee.findOne({ _id: decoded._id }).then((user) => {
+      Attendee.findOne({
+        _id: decoded._id,
+      }).then((user) => {
         if (user) {
           user.setPassword(newPassword);
           user.save().then(() => res.json({}));
         } else {
-          res.status(404).json({ errors: { global: "Invalid token" } });
+          res.status(404).json({
+            errors: {
+              global: "Invalid token",
+            },
+          });
         }
       });
     }
