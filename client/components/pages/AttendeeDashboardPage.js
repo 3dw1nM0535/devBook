@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Header, Segment, Image } from "semantic-ui-react";
+import { Grid, Header, Segment } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import io from "socket.io-client";
@@ -29,7 +29,7 @@ class AttendeeDashboardPage extends React.Component {
 						<Header as="h2">Posts section</Header>
 					</Grid.Column>
 					<Grid.Column width={4} textAlign="center">
-						<Header as="h2">Push Notifications section</Header>
+						<Header as="h2">Notifications</Header>
 					</Grid.Column>
 				</Grid.Row>
       </Grid>
