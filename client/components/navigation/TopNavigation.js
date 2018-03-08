@@ -4,7 +4,8 @@ import { Menu, Dropdown, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import gravatarUrl from "gravatar-url";
+// import gravatarUrl from "gravatar-url";
+import faker from "faker";
 
 import * as actions from "../../actions/authUser";
 
@@ -23,7 +24,7 @@ class TopNavigation extends React.Component {
     const { activeItem } = this.state;
 
     const trigger = (
-      <Image avatar src={gravatarUrl(user.email)} />
+      <Image avatar src={faker.internet.avatar()} />
     );
 
     const text = (
