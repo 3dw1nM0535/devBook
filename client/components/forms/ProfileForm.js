@@ -6,24 +6,27 @@ import PropTypes from "prop-types";
 import InlineError from "../messages/InlineError";
 
 class ProfileForm extends React.Component {
-  state = {
-    data: {
-      firstname: this.props.data.firstname,
-      lastname: this.props.data.lastname,
-      email: this.props.data.email,
-    },
-    loading: false,
-    errors: {},
-  };
-
-  componentWillReceiveProps = nextProps =>
-    this.setState({
+  constructor(props) {
+    super(props);
+    this.state = {
       data: {
-        firstname: nextProps.data.firstname,
-        lastname: nextProps.data.lastname,
-        email: nextProps.data.email,
+        firstname: "",
+        lastname: "",
+        email: "",
       },
-    });
+      loading: false,
+      errors: {},
+    };
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    const data = {
+      firstname: nextProps.data.firstname,
+      lastname: nextProps.data.lastname,
+      email: nextProps.data.email,
+    };
+    this.setState({ data });
+  }
 
   onChange = (e) => {
     this.setState({
@@ -66,7 +69,6 @@ class ProfileForm extends React.Component {
               <input
                 type="text"
                 name="firstname"
-                id="firstname"
                 placeholder="Your first name"
                 value={data.firstname}
                 onChange={this.onChange}
@@ -79,7 +81,6 @@ class ProfileForm extends React.Component {
               <input
                 type="text"
                 name="lastname"
-                id="lastname"
                 placeholder="Your last name"
                 value={data.lastname}
                 onChange={this.onChange}
@@ -93,7 +94,6 @@ class ProfileForm extends React.Component {
               <input
                 type="email"
                 name="email"
-                id="email"
                 placeholder="example@email.com"
                 value={data.email}
                 onChange={this.onChange}
@@ -111,9 +111,9 @@ class ProfileForm extends React.Component {
 ProfileForm.propTypes = {
   submit: PropTypes.func.isRequired,
   data: PropTypes.shape({
-    firstname: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    email: PropTypes.string,
   }).isRequired,
 };
 
