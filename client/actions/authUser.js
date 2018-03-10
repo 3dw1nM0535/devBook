@@ -1,4 +1,5 @@
 import axios from "axios";
+import { push } from "react-router-redux";
 
 import { userLoggedIn, userLoggedOut } from "./actionCreators";
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
@@ -45,4 +46,17 @@ export const confirmEmail = token => dispatch =>
     .then((user) => {
       localStorage.token = user.token;
       dispatch(userLoggedIn(user));
+    });
+
+// Fetch user profile data
+export const fetchProfile = _id => () =>
+  axios.post("/api/auth/profile", { _id }).then(res => res.data.user);
+
+// Update user profile
+export const updateProfile = data => dispatch =>
+  axios.post("/api/auth/update", { data }).then(res => res.data.user)
+    .then((user) => {
+      localStorage.token = user.token;
+      dispatch(userLoggedIn(user));
+      dispatch(push("/profile"));
     });
