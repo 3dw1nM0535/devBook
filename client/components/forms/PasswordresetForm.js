@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Card } from "semantic-ui-react";
 import Validator from "validator";
 import PropTypes from "prop-types";
 
@@ -51,33 +51,35 @@ class PasswordresetForm extends React.Component {
     const { data, loading, errors } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit} unstackable={false} loading={loading}>
-        <Form.Field error={!!errors.newPassword}>
-          <label htmlFor="newPassword">New Password</label>
-          <input
-            type="password"
-            name="newPassword"
-            id="newPassword"
-            placeholder="New Password"
-            onChange={this.onChange}
-            value={data.newPassword}
-          />
-          { errors.newPassword && <InlineError text={errors.newPassword} /> }
-        </Form.Field>
-        <Form.Field error={!!errors.confirmNewPassword}>
-          <label htmlFor="confirmNewPassword">Confirm New Password</label>
-          <input
-            type="password"
-            name="confirmNewPassword"
-            id="confirmNewPassword"
-            placeholder="Confirm New Password"
-            onChange={this.onChange}
-            value={data.confirmNewPassword}
-          />
-          { errors.confirmNewPassword && <InlineError text={errors.confirmNewPassword} /> }
-        </Form.Field>
-        <Button color="green">Reset Password</Button>
-      </Form>
+      <Card centered fluid>
+      	<Form onSubmit={this.onSubmit} unstackable={false} loading={loading}>
+	        <Form.Field error={!!errors.newPassword}>
+	          <label htmlFor="newPassword">New Password</label>
+	          <input
+	            type="password"
+	            name="newPassword"
+	            id="newPassword"
+	            placeholder="New Password"
+	            onChange={this.onChange}
+	            value={data.newPassword}
+	          />
+	          { errors.newPassword && <InlineError text={errors.newPassword} /> }
+	        </Form.Field>
+	        <Form.Field error={!!errors.confirmNewPassword}>
+	          <label htmlFor="confirmNewPassword">Confirm New Password</label>
+	          <input
+	            type="password"
+	            name="confirmNewPassword"
+	            id="confirmNewPassword"
+	            placeholder="Confirm New Password"
+	            onChange={this.onChange}
+	            value={data.confirmNewPassword}
+	          />
+	          { errors.confirmNewPassword && <InlineError text={errors.confirmNewPassword} /> }
+	        </Form.Field>
+	        <Button color="green">Reset Password</Button>
+      	</Form>
+      </Card>
     );
   }
 }
