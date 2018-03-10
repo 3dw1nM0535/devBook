@@ -1,0 +1,22 @@
+
+.fileContainer {
+  padding: .5rem;
+  margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background: palevioletred;
+  display: table;
+  cursor: pointer;
+  border: none;
+  border-radius: 2.5px;
+  background-color: forestgreen;
+  color: white;
+}
+
+input[type=file] {
+  display: none;
+}
+
+.segment {
+  margin-top: 10rem !important;
+}
