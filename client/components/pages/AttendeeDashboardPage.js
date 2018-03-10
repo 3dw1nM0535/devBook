@@ -15,23 +15,23 @@ class AttendeeDashboardPage extends React.Component {
   }
 
   render() {
-    const { isConfirmed, user } = this.props;
+    const { isConfirmed } = this.props;
 
     return (
       <Grid container divided stackable>
-				<Grid.Row columns={3}>
-					<Grid.Column width={4} textAlign="center" only="tablet mobile computer">
-						<Segment textAlign="center">
-							<Header as="h2">Profile section</Header>
-						</Segment>
-					</Grid.Column>
-					<Grid.Column width={8} textAlign="center">
-						<Header as="h2">Posts section</Header>
-					</Grid.Column>
-					<Grid.Column width={4} textAlign="center">
-						<Header as="h2">Notifications</Header>
-					</Grid.Column>
-				</Grid.Row>
+        <Grid.Row columns={3}>
+          <Grid.Column width={4} textAlign="center" only="tablet mobile computer">
+            <Segment textAlign="center">
+              <Header as="h2">Profile section</Header>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column width={8} textAlign="center">
+            { !isConfirmed && <ConfirmEmailMessage /> }
+          </Grid.Column>
+          <Grid.Column width={4} textAlign="center">
+            <Header as="h2">Notifications</Header>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     );
   }
@@ -39,8 +39,7 @@ class AttendeeDashboardPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-		isConfirmed: state.user.confirmed,
-		user: state.user,
+    isConfirmed: state.user.confirmed,
   };
 }
 
