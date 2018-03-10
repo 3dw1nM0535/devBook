@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import PropType from "prop-types";
 
 import ProfileForm from "../forms/ProfileForm";
-import decoder from "../../utils/decoder";
 import { fetchProfile, updateProfile } from "../../actions/authUser";
 
 class ProfilesettingPage extends React.Component {
@@ -13,8 +12,7 @@ class ProfilesettingPage extends React.Component {
   };
 
   componentDidMount = () => {
-    const decoded = decoder(this.props.token);
-    this.props.fetchProfile(decoded._id).then(user => this.setState({ data: user }));
+    this.props.fetchProfile().then(user => this.setState({ data: user }));
   }
 
   submit = data => this.props.updateProfile(data);

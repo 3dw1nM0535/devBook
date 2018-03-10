@@ -49,8 +49,8 @@ export const confirmEmail = token => dispatch =>
     });
 
 // Fetch user profile data
-export const fetchProfile = _id => () =>
-  axios.post("/api/auth/profile", { _id }).then(res => res.data.user);
+export const fetchProfile = () => () =>
+  axios.get("/api/auth/profile").then(res => res.data.user);
 
 // Update user profile
 export const updateProfile = data => dispatch =>
