@@ -114,7 +114,7 @@ router.post("/reset-password", (req, res) => {
 });
 
 // Get user profile route handler
-router.post("/profile", isAuthenticated, (req, res) => {
+router.get("/profile", isAuthenticated, (req, res) => {
   Attendee.findOne({ _id: req.user._id }).then((user) => {
     if (user) {
       res.json({ user: user.toJSON() });
