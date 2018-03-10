@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import Attendee from "../../models/Attendee";
 import { sendResetPasswordEmail } from "../../mailer/authMailer";
 import privateKeys from "../../../config/private_keys";
+import isAuthenticated from "../../middleware/authenticate";
 
 const router = express.Router();
 
@@ -108,6 +109,33 @@ router.post("/reset-password", (req, res) => {
           });
         }
       });
+    }
+  });
+});
+
+// Get user profile route handler
+router.post("/profile", isAuthenticated, (req, res) => {
+  Attendee.findOne({ _id: req.user._id }).then((user) => {
+    if (user) {
+      res.json({ user: user.toJSON() });
+    } else {
+      res.json({});
+    }
+  });
+});
+
+// Update user profile route handler
+router.post("/update", isAuthenticated, (req, res) => {
+  const { data } = req.body;
+  Attendee.findOneAndUpdate(
+    { _id: req.user._id },
+    { firstname: data.firstname, lastname: data.lastname, email: data.email },
+    { new: true },
+  ).then((user) => {
+    if (user) {
+      res.json({ user: user.toJSON() });
+    } else {
+      res.json({});
     }
   });
 });
