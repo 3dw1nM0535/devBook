@@ -17,6 +17,6 @@ input[type=file] {
   display: none;
 }
 
-.segment {
+.segment-padded {
   margin-top: 10rem !important;
 }
