@@ -3,7 +3,11 @@ import { Message } from "semantic-ui-react";
 
 
 const ConfirmEmailMessage = () => (
-  <Message header="Welcome to Event.com" content="Please check your e-mail to verify your Email address." />
+	<Message>
+		<Message.Content>
+			Please check your e-email to confirm your Email address
+		</Message.Content>
+	</Message>
 );
 
 export default ConfirmEmailMessage;
