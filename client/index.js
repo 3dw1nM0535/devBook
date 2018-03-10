@@ -3,19 +3,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Router } from "react-router";
-import decode from "jwt-decode";
 
 import "semantic-ui-css/semantic.min.css";
 import { userLoggedIn } from "./actions/actionCreators";
 import configureStore, { history } from "./store/store";
 import setAuthorizationHeader from "./utils/setAuthorizationHeader";
+import decoder from "./utils/decoder";
 
 import App from "./App";
 
 const store = configureStore();
 
 if (localStorage.token) {
-  const payload = decode(localStorage.token);
+  const payload = decoder(localStorage.token);
   const user = {
     token: localStorage.token,
     _id: payload._id,
