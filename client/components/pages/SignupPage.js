@@ -15,8 +15,9 @@ class SignupPage extends React.Component {
     return (
       <Grid padded centered stackable>
         <Grid.Column width={7}>
-          <Header as="h2">Sign Up</Header>
+        <Header as="h2">Sign Up</Header>
           <SignupForm submit={this.submit} />
+
           <p>Already have an Account? Proceed to <Link to="/login">Login</Link></p>
         </Grid.Column>
       </Grid>

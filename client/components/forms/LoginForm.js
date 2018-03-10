@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Message } from "semantic-ui-react";
+import { Form, Button, Message, Card, Header } from "semantic-ui-react";
 import isEmail from "validator/lib/isEmail";
 import PropTypes from "prop-types";
 
@@ -49,41 +49,28 @@ class LoginForm extends React.Component {
   render() {
     const { data, loading, errors } = this.state;
     return (
-        <Form unstackable={false} onSubmit={this.onSubmit} loading={loading}>
-        { errors.global && (
-          <Message negative>
-            <Message.Header>Something went wrong</Message.Header>
-            <p>{ errors.global }</p>
-          </Message>
-          )
-        }
-          <Form.Field error={!!errors.email}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="example@email.com"
-              onChange={this.onChange}
-              value={data.email}
-            />
-          { errors.email && <InlineError text={errors.email} /> }
-          </Form.Field>
-          <Form.Field error={!!errors.password}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              onChange={this.onChange}
-              value={data.password}
-            />
-          { errors.password && <InlineError text={errors.password} /> }
-          </Form.Field>
-          <Button color="green">Login</Button>
-        </Form>
-    );
+			<Card fluid centered>
+				<Card.Content>
+          <Form unstackable={false} onSubmit={this.onSubmit} loading={loading}>
+            {errors.global && <Message negative>
+                <Message.Header>Something went wrong</Message.Header>
+                <p>{errors.global}</p>
+              </Message>}
+            <Form.Field error={!!errors.email}>
+              <label htmlFor="email">Email</label>
+              <input type="email" name="email" id="email" placeholder="example@email.com" onChange={this.onChange} value={data.email} />
+              {errors.email && <InlineError text={errors.email} />}
+            </Form.Field>
+            <Form.Field error={!!errors.password}>
+              <label htmlFor="password">Password</label>
+              <input type="password" name="password" id="password" placeholder="Password" onChange={this.onChange} value={data.password} />
+              {errors.password && <InlineError text={errors.password} />}
+            </Form.Field>
+            <Button color="green">Login</Button>
+          </Form>
+        </Card.Content>
+			</Card>
+		);
   }
 }
 
