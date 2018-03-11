@@ -10,10 +10,7 @@ import "../styles/styles.css";
 
 class ProfilesettingPage extends React.Component {
   state = {
-    data: {
-      profilePhoto: "",
-    },
-    file: null,
+    imageURL: "",
     defaultPhoto: "https://res.cloudinary.com/dazskjikr/image/upload/v1520713650/363633-200.png",
   };
 
@@ -22,7 +19,7 @@ class ProfilesettingPage extends React.Component {
   submit = data => this.props.updateProfile(data);
 
   render() {
-    const { data, defaultPhoto } = this.state;
+    const { imageURL, defaultPhoto } = this.state;
 
     return (
       <Grid centered padded stackable columns={2}>
@@ -30,10 +27,10 @@ class ProfilesettingPage extends React.Component {
           <ProfileForm submit={this.submit} data={this.state.data} />
         </Grid.Column>
         <Grid.Column>
-          { !data.profilePhoto ?
-            <Image rounded size="medium" src={defaultPhoto} />
+          { !imageURL ?
+            <Image rounded size="medium" src={defaultPhoto} alt="profile-image" />
             :
-            <Image rounded size="medium" src={data.profilePhoto} />
+            <Image rounded size="medium" src={imageURL} alt="profile-image" />
           }
            <label className="fileContainer">
             Upload a picture

@@ -4,8 +4,6 @@ import { Menu, Dropdown, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-// import gravatarUrl from "gravatar-url";
-import faker from "faker";
 
 import * as actions from "../../actions/authUser";
 
@@ -14,6 +12,7 @@ class TopNavigation extends React.Component {
     super(props);
     this.state = {
       activeItem: "Home",
+      defaultAvatar: "https://res.cloudinary.com/dazskjikr/image/upload/v1520713650/363633-200.png",
     };
   }
 
@@ -21,10 +20,10 @@ class TopNavigation extends React.Component {
 
   render() {
     const { logout, user } = this.props;
-    const { activeItem } = this.state;
+    const { activeItem, defaultAvatar } = this.state;
 
     const trigger = (
-      <Image avatar src={faker.internet.avatar()} />
+      <Image avatar src={defaultAvatar} />
     );
 
     const text = (
