@@ -12,7 +12,6 @@ class TopNavigation extends React.Component {
     super(props);
     this.state = {
       activeItem: "Home",
-      defaultAvatar: "https://res.cloudinary.com/dazskjikr/image/upload/v1520713650/363633-200.png",
     };
   }
 
@@ -20,10 +19,10 @@ class TopNavigation extends React.Component {
 
   render() {
     const { logout, user } = this.props;
-    const { activeItem, defaultAvatar } = this.state;
+    const { activeItem } = this.state;
 
     const trigger = (
-      <Image avatar src={defaultAvatar} />
+      <Image avatar src={user.imageURL} />
     );
 
     const text = (
@@ -58,6 +57,8 @@ function mapStateToProps(state) {
 TopNavigation.propTypes = {
   logout: PropTypes.func.isRequired,
   user: PropTypes.shape({
+    imageURL: PropTypes.string.isRequired,
+    fullname: PropTypes.string.isRequired,
   }).isRequired,
 };
 

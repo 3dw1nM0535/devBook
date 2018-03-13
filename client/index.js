@@ -19,11 +19,11 @@ if (localStorage.token) {
   const user = {
     token: localStorage.token,
     _id: payload._id,
-    profilePhoto: payload.profilePhoto,
-    email: payload.email,
+    imageURL: payload.imageURL,
     fullname: payload.fullname,
     confirmed: payload.confirmed,
   };
+
   setAuthorizationHeader(localStorage.token);
   store.dispatch(userLoggedIn(user));
 }
