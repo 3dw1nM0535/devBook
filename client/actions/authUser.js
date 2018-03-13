@@ -60,3 +60,11 @@ export const updateProfile = data => dispatch =>
       dispatch(userLoggedIn(user));
       dispatch(push("/profile"));
     });
+
+// Update user Image(profile photo)
+export const updateImage = file => dispatch =>
+  axios.post("/api/auth/upload", { file }).then(res => res.data.user)
+    .then((user) => {
+      localStorage.token = user.token;
+      dispatch(userLoggedIn(user));
+    });

@@ -1,41 +1,62 @@
 import React from "react";
-import { Grid, Image, Icon } from "semantic-ui-react";
+import { Grid, Icon, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
+import request from "superagent";
 
 import ProfileForm from "../forms/ProfileForm";
-import { fetchProfile, updateProfile } from "../../actions/authUser";
-import { uploadFile } from "../../actions/fileUpload";
+import { fetchProfile, updateProfile, updateImage } from "../../actions/authUser";
 import "../styles/styles.css";
 
 class ProfilesettingPage extends React.Component {
   state = {
-    imageURL: "",
-    defaultPhoto: "https://res.cloudinary.com/dazskjikr/image/upload/v1520713650/363633-200.png",
+    data: {},
+    uploadCloudinaryURL: "",
   };
 
   componentDidMount = () => this.props.fetchProfile().then(user => this.setState({ data: user }));
 
+  handleDrop = () => {
+    const file = this.inputFile.files[0];
+    this.handleImageUpload(file);
+  }
+
+  handleImageUpload = (file) => {
+    const upload = request.post("https://api.cloudinary.com/v1_1/dazskjikr/image/upload")
+      .field("upload_preset", "ga3pypz9")
+      .field("file", file);
+
+    upload.end((err, res) => {
+      this.setState({
+        uploadCloudinaryURL: res.body.secure_url,
+      });
+
+      this.props.updateImage(this.state.uploadCloudinaryURL);
+    });
+  }
+
   submit = data => this.props.updateProfile(data);
 
   render() {
-    const { imageURL, defaultPhoto } = this.state;
+    const {
+      data,
+      uploadCloudinaryURL,
+      label,
+    } = this.state;
+    const { user } = this.props;
 
     return (
       <Grid centered padded stackable columns={2}>
         <Grid.Column>
-          <ProfileForm submit={this.submit} data={this.state.data} />
+          <ProfileForm submit={this.submit} data={data} />
         </Grid.Column>
         <Grid.Column>
-          { !imageURL ?
-            <Image rounded size="medium" src={defaultPhoto} alt="profile-image" />
-            :
-            <Image rounded size="medium" src={imageURL} alt="profile-image" />
-          }
-           <label className="fileContainer">
-            Upload a picture
+          { uploadCloudinaryURL && <Image size="small" rounded src={uploadCloudinaryURL} /> }
+          { !uploadCloudinaryURL && user.imageURL && <Image size="small" rounded src={user.imageURL} /> }
+          <label className="fileContainer">
+            Upload photo
             <Icon name="upload" />
-            <input type="file" id="file" onChange={this.handleFileUpload} />
+            <input type="file" ref={(ref) => { this.inputFile = ref; }} onChange={this.handleDrop} />
           </label>
         </Grid.Column>
       </Grid>
@@ -43,23 +64,26 @@ class ProfilesettingPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    token: state.user.token,
-  };
-}
-
 ProfilesettingPage.propTypes = {
   fetchProfile: PropType.func.isRequired,
   updateProfile: PropType.func.isRequired,
-  // uploadFile: PropType.func.isRequired,
+  updateImage: PropType.func.isRequired,
+  user: PropType.shape({
+    imageURL: PropType.string.isRequired,
+  }).isRequired,
 };
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
 
 export default connect(
   mapStateToProps,
   {
     fetchProfile,
     updateProfile,
-    uploadFile,
+    updateImage,
   },
 )(ProfilesettingPage);
