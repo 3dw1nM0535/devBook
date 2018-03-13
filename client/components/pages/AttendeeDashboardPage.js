@@ -20,7 +20,7 @@ class AttendeeDashboardPage extends React.Component {
     return (
       <Grid container divided stackable>
         <Grid.Row columns={3}>
-          <Grid.Column width={4} textAlign="center" only="tablet mobile computer">
+          <Grid.Column width={4} textAlign="center">
             <Segment textAlign="center">
               <Header as="h2">Profile section</Header>
             </Segment>
