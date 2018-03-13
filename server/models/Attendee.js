@@ -36,9 +36,9 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  profilePhoto: {
+  imageURL: {
     type: String,
-    default: "",
+    default: "https://res.cloudinary.com/dazskjikr/image/upload/v1520713650/363633-200.png",
   },
   dob: {
     type: Date,
@@ -68,14 +68,20 @@ UserSchema.methods.fullName = function fullName() {
 // Token out user data credentials
 UserSchema.methods.toJSON = function toJSON() {
   return {
-    profilePhoto: this.profilePhoto,
-    email: this.email,
+    imageURL: this.imageURL,
     _id: this._id,
     confirmed: this.confirmed,
     fullname: this.fullName(),
+    token: this.generateJWT(),
+  };
+};
+
+// Token out only user bio information
+UserSchema.methods.bioData = function bioData() {
+  return {
     firstname: this.firstname,
     lastname: this.lastname,
-    token: this.generateJWT(),
+    email: this.email,
   };
 };
 
@@ -83,8 +89,7 @@ UserSchema.methods.toJSON = function toJSON() {
 UserSchema.methods.generateJWT = function generateJWT() {
   return jwt.sign({
     _id: this._id,
-    profilePhoto: this.profilePhoto,
-    email: this.email,
+    imageURL: this.imageURL,
     fullname: this.fullName(),
     confirmed: this.confirmed,
   }, privateKeys.SECRET_KEY);

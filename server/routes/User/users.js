@@ -117,7 +117,7 @@ router.post("/reset-password", (req, res) => {
 router.get("/profile", isAuthenticated, (req, res) => {
   Attendee.findOne({ _id: req.user._id }).then((user) => {
     if (user) {
-      res.json({ user: user.toJSON() });
+      res.json({ user: user.bioData() });
     } else {
       res.json({});
     }
@@ -130,6 +130,21 @@ router.post("/update", isAuthenticated, (req, res) => {
   Attendee.findOneAndUpdate(
     { _id: req.user._id },
     { firstname: data.firstname, lastname: data.lastname, email: data.email },
+    { new: true },
+  ).then((user) => {
+    if (user) {
+      res.json({ user: user.toJSON() });
+    } else {
+      res.json({});
+    }
+  });
+});
+
+// Update user Image(profile photo)
+router.post("/upload", isAuthenticated, (req, res) => {
+  Attendee.findOneAndUpdate(
+    { _id: req.user._id },
+    { imageURL: req.body.file },
     { new: true },
   ).then((user) => {
     if (user) {

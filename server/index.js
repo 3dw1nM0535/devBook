@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import https from "https";
 import fs from "fs";
 import Socket from "socket.io";
+import cloudinary from "cloudinary";
 
 // Webpack assets configurations/Middleware
 import webpack from "webpack";
@@ -26,6 +27,13 @@ config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 // Connect to database
 mongoose.connect(privateKeys.MONGO_URI);
+
+// Cloudinary CDN private enviroments configuration
+cloudinary.config({
+  cloud_name: "dazskjikr",
+  api_key: "799966455353897",
+  api_secret: "so07tKSONG63ulWjByzb6IvvLgo",
+});
 
 // Certificate options
 const certOptions = {
@@ -59,6 +67,9 @@ app.use(webpackDevMiddleware(compiler, {
 
 // Parse application-json data
 app.use(bodyParser.json());
+
+// Parse application/x-www-urlencoded data
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Route mounting
 app.use("/api/auth", users);
