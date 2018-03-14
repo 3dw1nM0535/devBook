@@ -11,9 +11,7 @@ const router = express.Router();
 
 // User login route handler
 router.post("/", (req, res) => {
-  const {
-    credentials,
-  } = req.body;
+  const { credentials } = req.body;
   Attendee.findOne({
     email: credentials.email,
   }).then((user) => {
