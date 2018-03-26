@@ -42,7 +42,7 @@ const UserSchema = new Schema({
   },
   dob: {
     type: Date,
-    default: Date.now,
+    required: true,
   },
 }, { timestamps: true });
 
@@ -65,6 +65,11 @@ UserSchema.methods.fullName = function fullName() {
   }`;
 };
 
+// Return user's age
+UserSchema.methods.age = function age() {
+  return new Date().getFullYear() - new Date(this.dob).getFullYear();
+};
+
 // Token out user data credentials
 UserSchema.methods.toJSON = function toJSON() {
   return {
@@ -73,6 +78,7 @@ UserSchema.methods.toJSON = function toJSON() {
     confirmed: this.confirmed,
     fullname: this.fullName(),
     token: this.generateJWT(),
+    age: this.age(),
   };
 };
 
@@ -92,6 +98,7 @@ UserSchema.methods.generateJWT = function generateJWT() {
     imageURL: this.imageURL,
     fullname: this.fullName(),
     confirmed: this.confirmed,
+    age: this.age(),
   }, privateKeys.SECRET_KEY);
 };
 
