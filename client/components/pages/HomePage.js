@@ -8,7 +8,7 @@ const HomePage = () => (
   <Grid stackable columns={1}>
     <Grid.Column>
       <Segment className="segment-padded" textAlign="center" padded="very">
-        <Header as="h1">Event.com</Header>
+        <Header as="h1">Devbook</Header>
         <Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link>
       </Segment>
     </Grid.Column>

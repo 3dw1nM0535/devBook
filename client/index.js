@@ -22,6 +22,7 @@ if (localStorage.token) {
     imageURL: payload.imageURL,
     fullname: payload.fullname,
     confirmed: payload.confirmed,
+    age: payload.age,
   };
 
   setAuthorizationHeader(localStorage.token);

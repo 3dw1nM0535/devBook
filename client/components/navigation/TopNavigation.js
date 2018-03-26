@@ -38,7 +38,7 @@ class TopNavigation extends React.Component {
             <Dropdown trigger={trigger} pointing="top right" className="link item" icon={null}>
               <Dropdown.Menu>
                 <Dropdown.Item text={text} disabled />
-								<Dropdown.Item as={Link} to="/profile/settings" text="Settings" icon="settings" />
+								<Dropdown.Item as={Link} to="/profile/settings" text="Settings" icon="settings" name="Settings" active={activeItem === "Settings"} onClick={this.handleItemClick} />
                 <Dropdown.Item text="Logout" onClick={() => logout()} icon="sign out"/>
               </Dropdown.Menu>
             </Dropdown>
