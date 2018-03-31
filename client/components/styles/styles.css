@@ -18,7 +18,9 @@ input[type=file] {
 }
 
 .segment-padded {
-  margin-top: 10rem !important;
+  margin-top: auto !important;
+  height: 25em !important;
+  width: 20em !important;
 }
 
 .padding {

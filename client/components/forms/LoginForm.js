@@ -50,8 +50,11 @@ class LoginForm extends React.Component {
     const { data, loading, errors } = this.state;
     return (
 			<Card fluid centered>
+        <Card.Content>
+          <Card.Header>Login</Card.Header>
+        </Card.Content>
 				<Card.Content>
-          <Form unstackable={false} onSubmit={this.onSubmit} loading={loading}>
+          <Form unstackable={false} onSubmit={this.onSubmit} loading={loading} size="small">
             {errors.global && <Message negative>
                 <Message.Header>Something went wrong</Message.Header>
                 <p>{errors.global}</p>
@@ -66,7 +69,7 @@ class LoginForm extends React.Component {
               <input type="password" name="password" id="password" placeholder="Password" onChange={this.onChange} value={data.password} />
               {errors.password && <InlineError text={errors.password} />}
             </Form.Field>
-            <Button color="green">Login</Button>
+            <Button size="small" color="green">Login</Button>
           </Form>
         </Card.Content>
 			</Card>

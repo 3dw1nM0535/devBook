@@ -48,8 +48,11 @@ class ForgotPasswordForm extends React.Component {
 
 		return (
 			<Card centered fluid>
+        <Card.Content>
+          <Card.Header>Enter your Email</Card.Header>
+        </Card.Content>
 				<Card.Content>
-					<Form onSubmit={this.onSubmit} loading={loading}>
+					<Form onSubmit={this.onSubmit} loading={loading} size="small">
 						{ errors.global && (
 							<Message negative>
 								<p>{errors.global}</p>
@@ -67,7 +70,7 @@ class ForgotPasswordForm extends React.Component {
 							/>
 							{ errors.email && <InlineError text={errors.email} /> }
 						</Form.Field>
-						<Button color="green">Send Password Reset Email</Button>
+						<Button size="small" color="green">Send Password Reset Email</Button>
 					</Form>
 				</Card.Content>
 			</Card>

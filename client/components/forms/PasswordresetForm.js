@@ -52,8 +52,11 @@ class PasswordresetForm extends React.Component {
 
     return (
       <Card centered fluid>
+        <Card.Content>
+          <Card.Header>Reset password</Card.Header>
+        </Card.Content>
       	<Card.Content>
-         <Form onSubmit={this.onSubmit} unstackable={false} loading={loading}>
+         <Form onSubmit={this.onSubmit} unstackable={false} loading={loading} size="small">
           <Form.Field error={!!errors.newPassword}>
             <label htmlFor="newPassword">New Password</label>
             <input

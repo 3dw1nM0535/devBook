@@ -50,7 +50,7 @@ class SignupForm extends React.Component {
     if (!validator.isAlpha(data.lastname)) errors.lastname = "Invalid name";
     if (!data.lastname) errors.lastname = "Provide your lastname";
     if (!data.password) errors.password = "Provide a password for security";
-    if (!data.confirmPassword) errors.confirmPassword = "Provide a perfect match of your current password";
+    if (!data.confirmPassword) errors.confirmPassword = "Provide a perfect match of your password";
     if (!validator.equals(data.password, data.confirmPassword)) errors.confirmPassword = "Passwords do not match";
     if (!data.dob) errors.dob = "Provide your Date of Birth";
 
@@ -62,7 +62,10 @@ class SignupForm extends React.Component {
     return (
         <Card fluid centered>
           <Card.Content>
-            <Form unstackable={false} onSubmit={this.onSubmit} loading={loading}>
+            <Card.Header>Sign Up</Card.Header>
+          </Card.Content>
+          <Card.Content>
+            <Form unstackable={false} onSubmit={this.onSubmit} loading={loading} size="small">
               <Form.Field error={!!errors.firstname}>
                 <label htmlFor="firstname">First Name</label>
                 <input
@@ -135,7 +138,7 @@ class SignupForm extends React.Component {
                 />
                 { errors.confirmPassword && <InlineError text={errors.confirmPassword} /> }
               </Form.Field>
-              <Button color="green">Sign Up</Button>
+              <Button size="small" color="green">Sign Up</Button>
             </Form>
           </Card.Content>
         </Card>

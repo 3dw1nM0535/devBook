@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Header } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -16,7 +16,6 @@ class LoginPage extends React.Component {
     return (
       <Grid padded centered stackable>
         <Grid.Column width={7}>
-          <Header as="h2">Login</Header>
           <LoginForm submit={this.submit} />
 
           <Link to="/forgot-password">Forgot Password?</Link> or <Link to="/signup">Create an Account</Link>

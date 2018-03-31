@@ -63,7 +63,7 @@ class ProfileForm extends React.Component {
     return (
       <Card centered>
         <Card.Content>
-          <Form loading={loading} onSubmit={this.onSubmit}>
+          <Form loading={loading} onSubmit={this.onSubmit} size="small">
           <Card.Description content="Identify yourself on the platform with your firstname." />
             <Form.Field error={!!errors.firstname}>
               <label htmlFor="firstname">First name</label>
