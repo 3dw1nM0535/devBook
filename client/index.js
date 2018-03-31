@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import { Router } from "react-router";
 
 import "semantic-ui-css/semantic.min.css";
+import "./components/styles/styles.css";
+
 import { userLoggedIn } from "./actions/actionCreators";
 import configureStore, { history } from "./store/store";
 import setAuthorizationHeader from "./utils/setAuthorizationHeader";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Route } from "react-router-dom";
 
 import TopNavigation from "./components/navigation/TopNavigation";
 import NavBar from "./components/navigation/NavBar";
@@ -26,8 +26,8 @@ const App = ({ location, isAuthenticated }) => (
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
     <GuestRoute location={location} path="/signup" exact component={SignupPage} />
     <GuestRoute location={location} path="/forgot-password" exact component={ForgotPasswordPage} />
-    <GuestRoute location={location} path="/forgot-password/:token" exact component={PasswordresetPage} />
-    <UserRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
+    <Route path="/forgot-password/:token" exact component={PasswordresetPage} />
+    <Route path="/confirmation/:token" exact component={ConfirmationPage} />
     <UserRoute location={location} path="/dashboard" exact component={AttendeeDashboardPage} />
     <UserRoute location={location} path="/profile" exact component={ProfilePage} />
 		<UserRoute location={location} path="/profile/settings" axact component={ProfilesettingPage} />
