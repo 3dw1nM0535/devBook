@@ -1,4 +1,5 @@
 // Authentication middleware
+
 import jwt from "jsonwebtoken";
 
 import Attendee from "../models/Attendee";
