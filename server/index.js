@@ -45,9 +45,6 @@ const certOptions = {
 // Init express module
 const app = express();
 
-// Serve static files
-app.use(express.static(path.resolve(__dirname, "public")));
-
 // Config port
 const port = privateKeys.PORT;
 
@@ -77,7 +74,7 @@ app.use("/api/auth/users", auth);
 
 // Any route handler Middleware
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "public/index.html"));
+  res.sendFile(path.resolve("./client", "index.html"));
 });
 
 // Init server
