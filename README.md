@@ -1,4 +1,4 @@
-# DEVBOOK
+# devBook
 
 #### Developers
 * Meet your potential employer
@@ -22,5 +22,3 @@
 
 We all want that all-in-one!
 
-## Contributing
-I am yet to open source this platform after integrating core imlementations, but if you find this repo faster than i can open source it please reach out to me.
