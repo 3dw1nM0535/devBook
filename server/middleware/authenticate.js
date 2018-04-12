@@ -3,7 +3,7 @@
 import jwt from "jsonwebtoken";
 
 import Attendee from "../models/Attendee";
-import privateKeys from "../../config/private_keys";
+import privateKeys from "../config/private_keys";
 
 export default (req, res, next) => {
   const header = req.headers.authorization;

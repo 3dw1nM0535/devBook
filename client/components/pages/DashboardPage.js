@@ -6,7 +6,7 @@ import io from "socket.io-client";
 
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 
-class AttendeeDashboardPage extends React.Component {
+class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -43,8 +43,8 @@ function mapStateToProps(state) {
   };
 }
 
-AttendeeDashboardPage.propTypes = {
+DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps)(AttendeeDashboardPage);
+export default connect(mapStateToProps)(DashboardPage);

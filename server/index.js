@@ -20,7 +20,7 @@ import users from "./routes/User/users";
 
 
 // Module import
-import privateKeys from "../config/private_keys";
+import privateKeys from "./config/private_keys";
 import { onConnect } from "./utils/socket-io";
 
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
@@ -37,7 +37,7 @@ cloudinary.config({
 
 // Certificate options
 const certOptions = {
-  pfx: fs.readFileSync(path.resolve("config/localhost.pfx")),
+  pfx: fs.readFileSync(path.resolve(__dirname, "config/localhost.pfx")),
   passphrase: privateKeys.KEY,
 };
 

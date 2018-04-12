@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 import Attendee from "../../models/Attendee";
 import { sendResetPasswordEmail } from "../../mailer/authMailer";
-import privateKeys from "../../../config/private_keys";
+import privateKeys from "../../config/private_keys";
 import isAuthenticated from "../../middleware/authenticate";
 
 const router = express.Router();
