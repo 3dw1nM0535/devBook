@@ -12,7 +12,7 @@ import UserRoute from "./components/routes/UserRoutes";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import SignupPage from "./components/pages/SignupPage";
-import AttendeeDashboardPage from "./components/pages/AttendeeDashboardPage";
+import DashboardPage from "./components/pages/DashboardPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import PasswordresetPage from "./components/pages/PasswordresetPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
@@ -28,7 +28,7 @@ const App = ({ location, isAuthenticated }) => (
     <GuestRoute location={location} path="/forgot-password" exact component={ForgotPasswordPage} />
     <Route path="/forgot-password/:token" exact component={PasswordresetPage} />
     <Route path="/confirmation/:token" exact component={ConfirmationPage} />
-    <UserRoute location={location} path="/dashboard" exact component={AttendeeDashboardPage} />
+    <UserRoute location={location} path="/dashboard" exact component={DashboardPage} />
     <UserRoute location={location} path="/profile" exact component={ProfilePage} />
 		<UserRoute location={location} path="/profile/settings" axact component={ProfilesettingPage} />
   </div>
