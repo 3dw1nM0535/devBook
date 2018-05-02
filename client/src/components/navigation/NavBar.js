@@ -17,7 +17,7 @@ class NavBar extends React.Component {
 
     return (
       <Menu secondary>
-        <Menu.Item name="DevBook" as={Link} to="/" onClick={this.handleItemClick} active={activeItem === "DevBook"} />
+        <Menu.Item name="DevBook" to="/" onClick={this.handleItemClick} active={activeItem === "DevBook"} />
         <Menu.Menu position="right">
           <Menu.Item name="Login" as={Link} to="/login" active={activeItem === "Login"} onClick={this.handleItemClick} />
           <Menu.Item name="Sign Up" as={Link} to="/signup" active={activeItem === "Sign Up"} onClick={this.handleItemClick} />

@@ -14,7 +14,6 @@ class SignupForm extends React.Component {
         email: "",
         firstname: "",
         lastname: "",
-        dob: "",
         password: "",
         confirmPassword: "",
       },
@@ -52,7 +51,6 @@ class SignupForm extends React.Component {
     if (!data.password) errors.password = "Provide a password for security";
     if (!data.confirmPassword) errors.confirmPassword = "Provide a perfect match of your password";
     if (!validator.equals(data.password, data.confirmPassword)) errors.confirmPassword = "Passwords do not match";
-    if (!data.dob) errors.dob = "Provide your Date of Birth";
 
     return errors;
   }
@@ -101,18 +99,6 @@ class SignupForm extends React.Component {
                   value={data.email}
                 />
                 { errors.email && <InlineError text={errors.email} /> }
-              </Form.Field>
-              <Form.Field error={!!errors.dob}>
-                <label htmlFor="dob">Date of Birth</label>
-                <input
-                  type="date"
-                  name="dob"
-                  id="dob"
-                  placeholder="DD-MM-YYYY"
-                  onChange={this.onChange}
-                  value={data.dob}
-                />
-                { errors.dob && <InlineError text={errors.dob} /> }
               </Form.Field>
               <Form.Field error={!!errors.password}>
                 <label htmlFor="password">Password</label>

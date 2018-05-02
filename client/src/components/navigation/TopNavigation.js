@@ -33,11 +33,11 @@ class TopNavigation extends React.Component {
       <Menu secondary>
           <Menu.Menu position="right">
             <Menu.Item as={Link} active={activeItem === "Home"} to="/dashboard" name="Home" onClick={this.handleItemClick} />
-            <Menu.Item as={Link} active={activeItem === "Profile"} to="/profile" name="Profile" onClick={this.handleItemClick} />
             <Dropdown trigger="Notifications" pointing="top right" className="link item" icon={null} />
             <Dropdown trigger={trigger} pointing="top right" className="link item" icon={null}>
               <Dropdown.Menu>
                 <Dropdown.Item text={text} disabled />
+                <Dropdown.Item as={Link} to="/profile" text="Profile" icon="user" name="Profile" active={activeItem === "Profile"} onClick={this.handleItemClick} />
 								<Dropdown.Item as={Link} to="/profile/settings" text="Settings" icon="settings" name="Settings" active={activeItem === "Settings"} onClick={this.handleItemClick} />
                 <Dropdown.Item text="Logout" onClick={() => logout()} icon="sign out"/>
               </Dropdown.Menu>
