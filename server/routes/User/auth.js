@@ -14,14 +14,12 @@ router.post("/", (req, res) => {
     email,
     firstname,
     lastname,
-    dob,
     password,
   } = req.body.data;
   const user = new Developer({
     email,
     firstname,
     lastname,
-    dob,
   });
   user.setPassword(password);
   user.setConfirmationToken();
