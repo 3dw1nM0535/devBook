@@ -5,14 +5,14 @@ import { Provider } from "react-redux";
 import { Router } from "react-router";
 
 import "semantic-ui-css/semantic.min.css";
-import "./style/styles.css";
+import "./src/style/styles.css";
 
-import { userLoggedIn } from "./actions/actionCreators";
-import configureStore, { history } from "./store/store";
-import setAuthorizationHeader from "./utils/setAuthorizationHeader";
-import decoder from "./utils/decoder";
+import { userLoggedIn } from "./src/actions/actionCreators";
+import configureStore, { history } from "./src/store/store";
+import setAuthorizationHeader from "./src/utils/setAuthorizationHeader";
+import decoder from "./src/utils/decoder";
 
-import App from "./App";
+import App from "./src/App";
 
 const store = configureStore();
 
@@ -41,8 +41,8 @@ ReactDOM.render(
 );
 
 if (module.hot) {
-  module.hot.accept("./App", () => {
-    const NextApp = require("./App").default;
+  module.hot.accept("./src/App", () => {
+    const NextApp = require("./src/App").default;
     ReactDOM.render(
       <Provider store={store}>
         <Router history={history}>
