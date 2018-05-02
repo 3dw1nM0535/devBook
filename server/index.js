@@ -91,5 +91,4 @@ mongoose.connection.once("open", () => {
 
   // Start server on defined port
   server.listen(port);
-
 }).on("error", console.error.bind(console, "Connection Error"));
