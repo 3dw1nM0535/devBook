@@ -2,7 +2,7 @@
 
 import jwt from "jsonwebtoken";
 
-import Attendee from "../models/Attendee";
+import Developer from "../models/developer";
 import privateKeys from "../config/private_keys";
 
 export default (req, res, next) => {
@@ -16,7 +16,7 @@ export default (req, res, next) => {
       if (err) {
         res.status(401).json({ errors: { global: "Invalid token" } });
       } else {
-        Attendee.findOne({ _id: decoded._id }).then((user) => {
+        Developer.findOne({ _id: decoded._id }).then((user) => {
           req.user = user;
           next();
         });

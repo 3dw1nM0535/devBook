@@ -2,7 +2,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 
-import Attendee from "../../models/Attendee";
+import Developer from "../../models/developer";
 import { sendResetPasswordEmail } from "../../mailer/authMailer";
 import privateKeys from "../../config/private_keys";
 import isAuthenticated from "../../middleware/authenticate";
@@ -12,7 +12,7 @@ const router = express.Router();
 // User login route handler
 router.post("/", (req, res) => {
   const { credentials } = req.body;
-  Attendee.findOne({
+  Developer.findOne({
     email: credentials.email,
   }).then((user) => {
     if (user && user.isValidPassword(credentials.password)) {
@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
 
 // Email confirmation route handler
 router.post("/confirmation", (req, res) => {
-  Attendee.findOneAndUpdate({
+  Developer.findOneAndUpdate({
     confirmationToken: req.body.token,
   }, {
     confirmed: true,
@@ -52,7 +52,7 @@ router.post("/confirmation", (req, res) => {
 
 // Forgot password route handler
 router.post("/forgot-password", (req, res) => {
-  Attendee.findOne({
+  Developer.findOne({
     email: req.body.email,
   }).then((user) => {
     if (user) {
@@ -93,7 +93,7 @@ router.post("/reset-password", (req, res) => {
         },
       });
     } else {
-      Attendee.findOne({
+      Developer.findOne({
         _id: decoded._id,
       }).then((user) => {
         if (user) {
@@ -113,7 +113,7 @@ router.post("/reset-password", (req, res) => {
 
 // Get user profile route handler
 router.get("/profile", isAuthenticated, (req, res) => {
-  Attendee.findOne({ _id: req.user._id }).then((user) => {
+  Developer.findOne({ _id: req.user._id }).then((user) => {
     if (user) {
       res.json({ user: user.bioData() });
     } else {
@@ -125,7 +125,7 @@ router.get("/profile", isAuthenticated, (req, res) => {
 // Update user profile route handler
 router.post("/update", isAuthenticated, (req, res) => {
   const { data } = req.body;
-  Attendee.findOneAndUpdate(
+  Developer.findOneAndUpdate(
     { _id: req.user._id },
     { firstname: data.firstname, lastname: data.lastname, email: data.email },
     { new: true },
@@ -140,7 +140,7 @@ router.post("/update", isAuthenticated, (req, res) => {
 
 // Update user Image(profile photo)
 router.post("/upload", isAuthenticated, (req, res) => {
-  Attendee.findOneAndUpdate(
+  Developer.findOneAndUpdate(
     { _id: req.user._id },
     { imageURL: req.body.file },
     { new: true },

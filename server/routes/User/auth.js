@@ -1,7 +1,7 @@
 // User sign authentication route
 
 import express from "express";
-import Attendee from "../../models/Attendee";
+import Developer from "../../models/developer";
 
 import { sendConfirmationEmail } from "../../mailer/authMailer";
 import { parseError } from "../../utils/parseErrors";
@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
     dob,
     password,
   } = req.body.data;
-  const user = new Attendee({
+  const user = new Developer({
     email,
     firstname,
     lastname,

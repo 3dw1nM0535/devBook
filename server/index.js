@@ -27,64 +27,69 @@ config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 // Connect to database
 mongoose.connect(privateKeys.MONGO_URI);
+mongoose.connection.once("open", () => {
+  // Cloudinary CDN private enviroments configuration
+  cloudinary.config({
+    cloud_name: "dazskjikr",
+    api_key: "799966455353897",
+    api_secret: "so07tKSONG63ulWjByzb6IvvLgo",
+  });
 
-// Cloudinary CDN private enviroments configuration
-cloudinary.config({
-  cloud_name: "dazskjikr",
-  api_key: "799966455353897",
-  api_secret: "so07tKSONG63ulWjByzb6IvvLgo",
-});
-
-// Certificate options
-const certOptions = {
-  pfx: fs.readFileSync(path.resolve(__dirname, "config/localhost.pfx")),
-  passphrase: privateKeys.KEY,
-};
+  // Certificate options
+  const certOptions = {
+    pfx: fs.readFileSync(path.resolve(__dirname, "config/localhost.pfx")),
+    passphrase: privateKeys.KEY,
+  };
 
 
-// Init express module
-const app = express();
+  // Init express module
+  const app = express();
 
-// Config port
-const port = privateKeys.PORT;
+  // Config port
+  const port = privateKeys.PORT;
 
-// Wrap webpack configurations to webpack
-const compiler = webpack(config);
+  // Wrap webpack configurations to webpack
+  const compiler = webpack(config);
 
-// Webpack hot reloading Middleware
-app.use(webpackHotMiddleware(compiler));
+  // Webpack hot reloading Middleware
+  app.use(webpackHotMiddleware(compiler));
 
-// Webpack bundler Middleware
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  hot: true,
-  historyApiFallback: true,
-  publicPath: config.output.publicPath,
-}));
+  // Webpack bundler Middleware
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    hot: true,
+    historyApiFallback: true,
+    publicPath: config.output.publicPath,
+  }));
 
-// Parse application-json data
-app.use(bodyParser.json());
+  // Static files middleware
+  app.use(express.static(path.resolve("./build")));
 
-// Parse application/x-www-urlencoded data
-app.use(bodyParser.urlencoded({ extended: false }));
+  // Parse application-json data
+  app.use(bodyParser.json());
 
-// Route mounting
-app.use("/api/auth", users);
-app.use("/api/auth/users", auth);
+  // Parse application/x-www-urlencoded data
+  app.use(bodyParser.urlencoded({ extended: false }));
 
-// Any route handler Middleware
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("./client", "index.html"));
-});
+  // Route mounting
+  app.use("/api/auth", users);
+  app.use("/api/auth/users", auth);
 
-// Init server
-const server = https.createServer(certOptions, app);
+  // Any route handler Middleware
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve("./client", "index.html"));
+  });
 
-// IO Init
-const io = Socket(server);
+  // Init server
+  const server = https.createServer(certOptions, app);
 
-// Listen for socket connetion
-io.on("connection", onConnect);
+  // IO Init
+  const io = Socket(server);
 
-// Start server on defined port
-server.listen(port);
+  // Listen for socket connetion
+  io.on("connection", onConnect);
+
+  // Start server on defined port
+  server.listen(port);
+
+}).on("error", console.error.bind(console, "Connection Error"));
