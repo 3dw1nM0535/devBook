@@ -88,7 +88,7 @@ class ProfileForm extends React.Component {
               />
               { errors.lastname && <InlineError text={errors.lastname} /> }
             </Form.Field>
-            <Card.Description content="Your email for communication about your account and bookings,
+            <Card.Description content="Your email for communication about your account and events,
               and also security issues concerning your account." />
             <Form.Field error={!!errors.email}>
               <label htmlFor="email">Email</label>
